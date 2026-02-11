@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://boy4wjx3ct8lc"]
+
+[ext_resource type="PackedScene" uid="uid://dbqs0ixr785ik" path="res://scenes/Weapons/BaseWeapon.tscn" id="1_c035f"]
+[ext_resource type="Script" uid="uid://corhpsdp657lp" path="res://src/Weapons/WeaponAk47.cs" id="2_apucu"]
+[ext_resource type="PackedScene" uid="uid://ccoiasu4bprik" path="res://scenes/Projectiles/ProjectileAk47Bullet.tscn" id="3_xynhe"]
+[ext_resource type="Script" uid="uid://cwrwfjmfexleu" path="res://src/Weapons/WeaponStats.cs" id="4_2ysuu"]
+[ext_resource type="Script" uid="uid://cu4mtsa3whygp" path="res://src/Items/ItemProperties.cs" id="5_3grl4"]
+
+[sub_resource type="Resource" id="Resource_ur7re"]
+script = ExtResource("4_2ysuu")
+CritDamageMultiplier = 1.2
+CritChanceProportion = 0.17
+ProjectileSpeed = 6000
+ProjectileScaleMultiplier = 1.1
+AttackSpeedSec = 0.15
+Additional = Dictionary[String, Variant]({
+"BloomCoefficient": 0.01,
+"HorizontalBaseRecoil": 3.0,
+"HorizontalRecoilRandom": 1.0,
+"MagazineCapacity": 30,
+"ReloadTimeMs": 1500,
+"VerticalBaseRecoil": 15.0,
+"VerticalRecoilRandom": 0.5
+})
+metadata/_custom_type_script = "uid://cwrwfjmfexleu"
+
+[sub_resource type="Resource" id="Resource_s5ak3"]
+script = ExtResource("5_3grl4")
+metadata/_custom_type_script = "uid://cu4mtsa3whygp"
+
+[node name="Ak47" unique_id=1361114539 instance=ExtResource("1_c035f")]
+script = ExtResource("2_apucu")
+_projectileScene = ExtResource("3_xynhe")
+Stats = SubResource("Resource_ur7re")
+Properties = SubResource("Resource_s5ak3")

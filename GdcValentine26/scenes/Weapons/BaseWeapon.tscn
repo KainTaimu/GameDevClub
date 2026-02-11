@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dbqs0ixr785ik"]
+
+[ext_resource type="Script" uid="uid://nhvj7q5cagxc" path="res://src/Weapons/BaseWeapon.cs" id="1_kjhvj"]
+[ext_resource type="Script" uid="uid://cwrwfjmfexleu" path="res://src/Weapons/WeaponStats.cs" id="2_ncwqi"]
+[ext_resource type="Script" uid="uid://cu4mtsa3whygp" path="res://src/Items/ItemProperties.cs" id="3_jcoqp"]
+
+[sub_resource type="Resource" id="Resource_be2wl"]
+script = ExtResource("2_ncwqi")
+Additional = null
+metadata/_custom_type_script = "uid://cwrwfjmfexleu"
+
+[sub_resource type="Resource" id="Resource_rlt4g"]
+script = ExtResource("3_jcoqp")
+metadata/_custom_type_script = "uid://cu4mtsa3whygp"
+
+[node name="BaseWeapon" type="Node" unique_id=1361114539]
+script = ExtResource("1_kjhvj")
+Stats = SubResource("Resource_be2wl")
+Properties = SubResource("Resource_rlt4g")

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dgj1dadxl3v4w"]
+
+[ext_resource type="Script" uid="uid://b8phj1nedu4bc" path="res://src/Core/Services/ServiceLocator.cs" id="1_wqi2k"]
+
+[node name="ServiceLocator" type="Node" unique_id=1687875307 node_paths=PackedStringArray("_exportedServices")]
+script = ExtResource("1_wqi2k")
+_exportedServices = []
