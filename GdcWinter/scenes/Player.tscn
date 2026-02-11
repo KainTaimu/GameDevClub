@@ -1,0 +1,210 @@
+[gd_scene load_steps=30 format=3 uid="uid://d2bbcd0umajki"]
+
+[ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://bgc137qeeq2w3" path="res://src/Player/PlayerInteractionArea.cs" id="2_o4126"]
+[ext_resource type="Script" uid="uid://bkn66m3ny3jmx" path="res://src/Player/Stats.cs" id="2_v6fml"]
+[ext_resource type="Script" uid="uid://cg86rxne1e6gv" path="res://src/Player/StateGrounded.cs" id="3_70d11"]
+[ext_resource type="Script" uid="uid://cucb1v8pg40nq" path="res://src/Player/PlayerCollisionArea.cs" id="3_lkdrv"]
+[ext_resource type="Script" uid="uid://8j2d8vml6hda" path="res://src/Player/PlayerStateController.cs" id="3_mdl7e"]
+[ext_resource type="Script" uid="uid://c6osxa27rawlj" path="res://src/Player/PlayerHealthController.cs" id="4_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://v3jmfcjkjivo" path="res://assets/icon.svg" id="4_qu4a1"]
+[ext_resource type="Script" uid="uid://cr6l3ncxh2b2k" path="res://src/Player/StateJumpingOverBox.cs" id="6_khinc"]
+[ext_resource type="Script" uid="uid://dy0jkt7feu81" path="res://src/Player/StateCollidedWithBox.cs" id="7_bruh7"]
+[ext_resource type="Script" uid="uid://b772txwbwooi6" path="res://src/Player/StateDying.cs" id="8_6eyey"]
+[ext_resource type="Shader" uid="uid://bbwua2g02t0jl" path="res://src/Shaders/flash.gdshader" id="11_lkdrv"]
+[ext_resource type="Script" uid="uid://m44pemv1whga" path="res://src/Player/StateParry.cs" id="11_p7iby"]
+[ext_resource type="Texture2D" uid="uid://bryuim5u8eqi6" path="res://assets/qubit_slip.png" id="14_0rnld"]
+[ext_resource type="Script" uid="uid://ddoyvpe7ebfdr" path="res://src/Player/HealthPopup.cs" id="15_0rnld"]
+[ext_resource type="Texture2D" uid="uid://ry7rreni2un2" path="res://assets/heart.png" id="16_srp4u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
+size = Vector2(412, 127.999825)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cw2d6"]
+size = Vector2(128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0rnld"]
+radius = 346.77
+
+[sub_resource type="Resource" id="Resource_khinc"]
+resource_local_to_scene = true
+script = ExtResource("2_v6fml")
+metadata/_custom_type_script = "uid://bkn66m3ny3jmx"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7iby"]
+resource_local_to_scene = true
+shader = ExtResource("11_lkdrv")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flash_state = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rnld"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 0, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srp4u"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(50, 0, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfpux"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 20, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61ith"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(50, 20, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebwui"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 40, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfy4j"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(50, 40, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv3ic"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 60, 50, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_70d11"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qu4a1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rnld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srp4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfpux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61ith")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61ith")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebwui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfy4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv3ic")
+}],
+"loop": false,
+"name": &"dying",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("StatController")]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_p0vlq")
+StatController = NodePath("HealthController")
+
+[node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
+position = Vector2(0, -64)
+collision_layer = 256
+script = ExtResource("2_o4126")
+Player = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(142, -9.1552734e-05)
+shape = SubResource("RectangleShape2D_70d11")
+
+[node name="CollisionArea" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
+position = Vector2(0, -61.333336)
+collision_layer = 512
+collision_mask = 2
+script = ExtResource("3_lkdrv")
+Player = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2(0, -2.6666603)
+shape = SubResource("RectangleShape2D_cw2d6")
+debug_color = Color(0.9607843, 0, 0, 0.41960785)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -64)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0rnld")
+
+[node name="HealthController" type="Node" parent="." node_paths=PackedStringArray("_movementController", "_sprite")]
+script = ExtResource("4_cw2d6")
+Stats = SubResource("Resource_khinc")
+_movementController = NodePath("../StateController")
+_sprite = NodePath("../AnimatedSprite2D")
+
+[node name="StateController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
+script = ExtResource("3_mdl7e")
+_initialState = NodePath("Dying")
+_states = [NodePath("Grounded"), NodePath("JumpingOverBox"), NodePath("CollidedWithBox"), NodePath("Dying"), NodePath("Parry")]
+_owner = NodePath("..")
+_sprite = NodePath("../AnimatedSprite2D")
+_statController = NodePath("../HealthController")
+
+[node name="Grounded" type="Node" parent="StateController" node_paths=PackedStringArray("_owner", "_statController", "_interactionArea", "_collisionArea", "MovementController")]
+script = ExtResource("3_70d11")
+_owner = NodePath("../..")
+_statController = NodePath("../../HealthController")
+_interactionArea = NodePath("../../InteractionArea")
+_collisionArea = NodePath("../../CollisionArea")
+MovementController = NodePath("..")
+
+[node name="JumpingOverBox" type="Node" parent="StateController" node_paths=PackedStringArray("_player", "_interactionArea", "MovementController")]
+script = ExtResource("6_khinc")
+_player = NodePath("../..")
+_interactionArea = NodePath("../../InteractionArea")
+MovementController = NodePath("..")
+
+[node name="CollidedWithBox" type="Node" parent="StateController" node_paths=PackedStringArray("_collisionArea", "_statController", "MovementController")]
+script = ExtResource("7_bruh7")
+_collisionArea = NodePath("../../CollisionArea")
+_statController = NodePath("../../HealthController")
+MovementController = NodePath("..")
+
+[node name="Dying" type="Node" parent="StateController" node_paths=PackedStringArray("_sprite", "MovementController")]
+script = ExtResource("8_6eyey")
+_sprite = NodePath("../../AnimatedSprite2D")
+MovementController = NodePath("..")
+
+[node name="Parry" type="Node" parent="StateController" node_paths=PackedStringArray("_parryArea", "MovementController")]
+script = ExtResource("11_p7iby")
+_parryArea = NodePath("../../Area2D")
+MovementController = NodePath("..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_p7iby")
+position = Vector2(0, -64)
+sprite_frames = SubResource("SpriteFrames_70d11")
+
+[node name="HealthIcons" type="HBoxContainer" parent="." node_paths=PackedStringArray("_healthController")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -170.66667
+offset_right = 76.0
+offset_bottom = -130.66667
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(76, 20)
+size_flags_horizontal = 4
+alignment = 1
+script = ExtResource("15_0rnld")
+_heartTexture = ExtResource("16_srp4u")
+_healthController = NodePath("../HealthController")

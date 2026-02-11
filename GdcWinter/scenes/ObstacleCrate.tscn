@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7r6okn8p8ni4"]
+
+[ext_resource type="PackedScene" uid="uid://cc34f3sc0ndk2" path="res://scenes/Obstacle.tscn" id="1_uh5n2"]
+[ext_resource type="Script" uid="uid://bl4toncjgan67" path="res://src/Obstacles/ObstacleCrate.cs" id="2_7u0lo"]
+
+[node name="ObstacleCrate" node_paths=PackedStringArray("Top") instance=ExtResource("1_uh5n2")]
+script = ExtResource("2_7u0lo")
+Top = NodePath("Top")
+
+[node name="InteractionArea" parent="." index="1" node_paths=PackedStringArray("Obstacle")]
+Obstacle = NodePath("..")
+
+[node name="CollisionShape2D" parent="InteractionArea" index="0"]
+position = Vector2(0, -4)
+
+[node name="CollisionArea" parent="." index="2" node_paths=PackedStringArray("Obstacle")]
+Obstacle = NodePath("..")
+
+[node name="Top" type="Marker2D" parent="." index="3"]
+position = Vector2(0, -64)
+gizmo_extents = 12.0
+
+[node name="Hints" parent="." index="4"]
+offset_top = -84.0
+offset_bottom = -84.0
+_directions = Array[int]([0])

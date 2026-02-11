@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://2q4cien0ihv7"]
+
+[ext_resource type="PackedScene" uid="uid://cc34f3sc0ndk2" path="res://scenes/Obstacle.tscn" id="1_pb18e"]
+[ext_resource type="Script" uid="uid://cdyjmjgmcm0ip" path="res://src/Obstacles/ObstacleDrone.cs" id="2_ly6e4"]
+[ext_resource type="Script" uid="uid://djyu88bb7pj5w" path="res://src/Weapons/WeaponDrone.cs" id="3_pfsfj"]
+[ext_resource type="PackedScene" uid="uid://cwg72rcbdk6q3" path="res://scenes/ProjectileBullet.tscn" id="4_a1m3u"]
+[ext_resource type="Script" uid="uid://c6d4d3lnj4je5" path="res://src/Weapons/WeaponStats.cs" id="5_wr3mk"]
+
+[sub_resource type="Resource" id="Resource_m0lwa"]
+script = ExtResource("5_wr3mk")
+Damage = 2
+AttackSpeed = 2.0
+Additional = Dictionary[String, Variant]({
+"AttackSpeedRand": 1.0
+})
+metadata/_custom_type_script = "uid://c6d4d3lnj4je5"
+
+[node name="ObstacleDrone" instance=ExtResource("1_pb18e")]
+script = ExtResource("2_ly6e4")
+Type = 2
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 0)
+
+[node name="InteractionArea" parent="." index="1"]
+position = Vector2(0, 0)
+
+[node name="CollisionShape2D" parent="InteractionArea" index="0"]
+position = Vector2(0, 0)
+
+[node name="CollisionArea" parent="." index="2"]
+position = Vector2(0, 0)
+
+[node name="CollisionShape2D" parent="CollisionArea" index="0"]
+position = Vector2(0, 0)
+
+[node name="WeaponDrone" type="Node2D" parent="." index="3" node_paths=PackedStringArray("_bulletParent", "_timer")]
+script = ExtResource("3_pfsfj")
+_projectile = ExtResource("4_a1m3u")
+_bulletParent = NodePath("Bullets")
+_timer = NodePath("Timer")
+Stats = SubResource("Resource_m0lwa")
+
+[node name="Bullets" type="Node" parent="WeaponDrone" index="0"]
+
+[node name="Timer" type="Timer" parent="WeaponDrone" index="1"]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="WeaponDrone" index="2"]
+rect = Rect2(-36, -36, 72, 72)

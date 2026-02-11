@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://cc34f3sc0ndk2"]
+
+[ext_resource type="Texture2D" uid="uid://b0tt02381medl" path="res://assets/border.png" id="1_jde5u"]
+[ext_resource type="Script" uid="uid://brllsqfwl1bwu" path="res://src/Obstacles/Obstacle.cs" id="1_qf6v3"]
+[ext_resource type="Script" uid="uid://c1hi35j2oyplq" path="res://src/Obstacles/ObstacleInteractionArea.cs" id="3_n8ntr"]
+[ext_resource type="Script" uid="uid://dxxvd2jfic8e5" path="res://src/Obstacles/ObstacleCollisionArea.cs" id="4_nhv7q"]
+[ext_resource type="Script" uid="uid://3sokw03a85li" path="res://src/Obstacles/ObstacleHintsController.cs" id="5_mc1vs"]
+[ext_resource type="PackedScene" uid="uid://bok5j3kkws5t3" path="res://scenes/Hint.tscn" id="6_mc1vs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdg2s"]
+size = Vector2(72, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jde5u"]
+size = Vector2(64, 64)
+
+[node name="Obstacle" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_qf6v3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("1_jde5u")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+position = Vector2(0, -30)
+collision_mask = 0
+script = ExtResource("3_n8ntr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_sdg2s")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+position = Vector2(0, -30)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("4_nhv7q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_jde5u")
+debug_color = Color(0.9607843, 0, 0, 0.41960785)
+
+[node name="Hints" type="HBoxContainer" parent="."]
+z_index = 3
+scale = Vector2(2, 2)
+alignment = 1
+script = ExtResource("5_mc1vs")
+_arrowScene = ExtResource("6_mc1vs")
+
+[connection signal="area_exited" from="CollisionArea" to="." method="Exit"]

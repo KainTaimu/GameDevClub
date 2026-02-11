@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnfppai1wbb4"]
+
+[ext_resource type="PackedScene" uid="uid://cc34f3sc0ndk2" path="res://scenes/Obstacle.tscn" id="1_lxscg"]
+[ext_resource type="Script" uid="uid://lvfy8x6jwbu8" path="res://src/Obstacles/ObstacleTurret.cs" id="2_lxscg"]
+[ext_resource type="Script" uid="uid://b56y0p5ylbv8e" path="res://src/Weapons/WeaponTurret.cs" id="3_btm72"]
+[ext_resource type="Script" uid="uid://c6d4d3lnj4je5" path="res://src/Weapons/WeaponStats.cs" id="4_b2qr7"]
+[ext_resource type="PackedScene" uid="uid://cwg72rcbdk6q3" path="res://scenes/ProjectileBullet.tscn" id="4_wr0kc"]
+
+[sub_resource type="Resource" id="Resource_wr0kc"]
+script = ExtResource("4_b2qr7")
+Additional = null
+metadata/_custom_type_script = "uid://c6d4d3lnj4je5"
+
+[node name="ObstacleTurret" instance=ExtResource("1_lxscg")]
+script = ExtResource("2_lxscg")
+Type = 1
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 32)
+metadata/_edit_lock_ = true
+
+[node name="InteractionArea" parent="." index="1"]
+process_mode = 4
+visible = false
+position = Vector2(0, 36)
+monitoring = false
+monitorable = false
+metadata/_edit_lock_ = true
+
+[node name="CollisionArea" parent="." index="2" node_paths=PackedStringArray("Obstacle")]
+position = Vector2(0, 32)
+Obstacle = NodePath("..")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="CollisionArea" index="0"]
+position = Vector2(0, 0)
+metadata/_edit_lock_ = true
+
+[node name="WeaponTurret" type="Node2D" parent="." index="3" node_paths=PackedStringArray("_barrelEnd", "_timer")]
+position = Vector2(0, 32)
+script = ExtResource("3_btm72")
+_projectile = ExtResource("4_wr0kc")
+_barrelEnd = NodePath("Marker2D")
+_timer = NodePath("Timer")
+Stats = SubResource("Resource_wr0kc")
+
+[node name="Marker2D" type="Marker2D" parent="WeaponTurret" index="0"]
+position = Vector2(0, 64)
+
+[node name="Timer" type="Timer" parent="WeaponTurret" index="1"]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="WeaponTurret" index="2"]
+rect = Rect2(-36, -36, 72, 72)
+
+[node name="Hints" parent="." index="4"]
+offset_top = 80.0
+offset_bottom = 80.0
+_directions = Array[int]([2])

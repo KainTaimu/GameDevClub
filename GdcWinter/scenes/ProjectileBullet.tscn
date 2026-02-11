@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwg72rcbdk6q3"]
+
+[ext_resource type="PackedScene" uid="uid://c1uo58q10enok" path="res://scenes/Projectile.tscn" id="1_k5b6b"]
+[ext_resource type="Script" uid="uid://dx5k7n6bgf755" path="res://src/Weapons/ProjectileBullet.cs" id="2_5nfhu"]
+[ext_resource type="Texture2D" uid="uid://dmm2wcm8gqjis" path="res://assets/bullet.png" id="3_xcd42"]
+
+[node name="ProjectileBullet" instance=ExtResource("1_k5b6b")]
+process_mode = 1
+script = ExtResource("2_5nfhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(0, 2.9802322e-08)
+scale = Vector2(1.3333334, 0.5)
+texture = ExtResource("3_xcd42")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="2"]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnExitScreen"]

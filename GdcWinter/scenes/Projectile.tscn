@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1uo58q10enok"]
+
+[ext_resource type="Script" uid="uid://c0mba3nqixidv" path="res://src/Weapons/Projectile.cs" id="1_dprbf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vihyi"]
+size = Vector2(18, 4)
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 16
+collision_mask = 514
+script = ExtResource("1_dprbf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vihyi")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

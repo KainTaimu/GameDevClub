@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://0wrb0pqo4viu"]
+
+[ext_resource type="Script" uid="uid://cn2ul0add7fj4" path="res://src/Pickups/PickupPresent.cs" id="1_3162y"]
+[ext_resource type="Shader" uid="uid://8xgvp846xs5u" path="res://src/Shaders/hue.gdshader" id="2_ufk3u"]
+[ext_resource type="Texture2D" uid="uid://br7r6ewkullhg" path="res://assets/present.png" id="3_knqyd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7gm55"]
+resource_local_to_scene = true
+shader = ExtResource("2_ufk3u")
+shader_parameter/hue_shift = 0.8490000403275
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2gyh"]
+atlas = ExtResource("3_knqyd")
+region = Rect2(0, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnopc"]
+atlas = ExtResource("3_knqyd")
+region = Rect2(16, 0, 16, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j2gyh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2gyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnopc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bp0e"]
+size = Vector2(14, 18)
+
+[node name="PickupPresent" type="Area2D" node_paths=PackedStringArray("_sprite")]
+z_index = 1
+position = Vector2(0, -5.9604645e-08)
+scale = Vector2(5, 5)
+collision_layer = 4096
+collision_mask = 512
+script = ExtResource("1_3162y")
+_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_7gm55")
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_j2gyh")
+autoplay = "default"
+frame_progress = 0.15324457
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_3bp0e")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr2b3j1tt7876"]
+
+[ext_resource type="Script" uid="uid://cdlt1la4m1h72" path="res://src/Levels/ScoreController.cs" id="1_n8qy0"]
+
+[node name="ScoreController" type="Node" node_paths=PackedStringArray("_scoreLabel", "_timeLabel")]
+script = ExtResource("1_n8qy0")
+_scoreLabel = NodePath("CanvasLayer/VBoxContainer/Score")
+_timeLabel = NodePath("CanvasLayer/VBoxContainer/Time")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 68.0
+offset_bottom = 56.0
+
+[node name="Score" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Score: 0"
+
+[node name="Time" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Time: "
