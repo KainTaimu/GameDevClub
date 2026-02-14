@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://718c8xj27cvs"]
+
+[ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_cwodi"]
+[ext_resource type="Script" uid="uid://gvy20pbr1bum" path="res://src/Levels/ObjectiveKillTarget.cs" id="2_835iu"]
+[ext_resource type="Script" uid="uid://cwrwfjmfexleu" path="res://src/Weapons/WeaponStats.cs" id="2_q7crt"]
+[ext_resource type="PackedScene" uid="uid://cav2kda5gocoj" path="res://scenes/Enemies/EnemyEcsProxyBoss.tscn" id="3_nmb50"]
+
+[sub_resource type="Resource" id="Resource_2g1ft"]
+script = ExtResource("2_q7crt")
+Damage = 5
+CritDamageMultiplier = 1.2
+CritChanceProportion = 0.17
+ProjectileSpeed = 6000
+ProjectileScaleMultiplier = 1.1
+AttackSpeedSec = 0.15
+PierceLimit = 2
+Additional = Dictionary[String, Variant]({
+"BloomCoefficient": 0.01,
+"HorizontalBaseRecoil": 3.0,
+"HorizontalRecoilRandom": 1.0,
+"Knockback": 10.0,
+"MagazineCapacity": 30,
+"ReloadTimeMs": 1500,
+"VerticalBaseRecoil": 15.0,
+"VerticalRecoilRandom": 0.5
+})
+metadata/_custom_type_script = "uid://cwrwfjmfexleu"
+
+[node name="Level" unique_id=339669878 instance=ExtResource("1_cwodi")]
+
+[node name="Player" parent="." index="1" unique_id=1716515543]
+position = Vector2(960, 540)
+
+[node name="Ak47" parent="Player" index="5" unique_id=1361114539]
+Stats = SubResource("Resource_2g1ft")
+
+[node name="ObjectiveKillTarget" type="Node" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=559552507 node_paths=PackedStringArray("KillTarget", "_uiLayer", "_pauseController")]
+script = ExtResource("2_835iu")
+KillTarget = NodePath("EnemyECSProxyBoss")
+_winScreenScenePath = "uid://c6mxervt87xel"
+_uiLayer = NodePath("../../UI")
+_pauseController = NodePath("../../Systems/PauseController")
+
+[node name="EnemyECSProxyBoss" parent="Objectives/ObjectiveKillTarget" index="0" unique_id=423573223 instance=ExtResource("3_nmb50")]
+position = Vector2(2808, 915)
+
+[node name="EnemySpawner" parent="Systems" parent_id_path=PackedInt32Array(1712163909) index="2" unique_id=30611746]
+MaxEnemyCount = 500
+MaxSpawnTime = 0.5
+
+[node name="Label" parent="UI/MarginContainer" parent_id_path=PackedInt32Array(1199348178) index="0" unique_id=214866293]
+text = "Level 4"

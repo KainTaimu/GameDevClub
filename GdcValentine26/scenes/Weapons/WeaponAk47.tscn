@@ -19,6 +19,7 @@ Additional = Dictionary[String, Variant]({
 "BloomCoefficient": 0.01,
 "HorizontalBaseRecoil": 3.0,
 "HorizontalRecoilRandom": 1.0,
+"Knockback": 10.0,
 "MagazineCapacity": 30,
 "ReloadTimeMs": 1500,
 "VerticalBaseRecoil": 15.0,

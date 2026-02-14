@@ -20,16 +20,21 @@ public partial class PlayerHealthIndicator : HBoxContainer
         {
             CreateHeart();
         }
-        _player.Character.PlayerStats.OnHealthChanged += (_, _) => HandleOnPlayerHit();
+        _player.Character.PlayerStats.OnHealthChanged += HandleOnPlayerHit;
     }
 
-    private void HandleOnPlayerHit()
+    private void HandleOnPlayerHit(int old, int neww)
     {
-        var last = _hearts.LastOrDefault();
-        if (last is null)
-            return;
-        _hearts.Remove(last);
-        last.QueueFree();
+        var diff = old - neww;
+
+        for (int i = 0; i < diff; i++)
+        {
+            var last = _hearts.LastOrDefault();
+            if (last is null)
+                return;
+            _hearts.Remove(last);
+            last.QueueFree();
+        }
     }
 
     private void CreateHeart()

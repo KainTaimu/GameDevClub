@@ -40,6 +40,8 @@ public partial class WeaponAk47 : BaseWeapon, IMagazine
     private float _verticalBaseRecoil = 3f;
     private float _verticalRecoilRandom = 0.1f;
 
+    private float _knockback = 10f;
+
     public override void _Ready()
     {
         _magazineCapacity = (int)Stats.Additional["MagazineCapacity"];
@@ -51,6 +53,7 @@ public partial class WeaponAk47 : BaseWeapon, IMagazine
         _horizontalRecoilRandom = (float)Stats.Additional["HorizontalRecoilRandom"];
         _verticalBaseRecoil = (float)Stats.Additional["VerticalBaseRecoil"];
         _verticalRecoilRandom = (float)Stats.Additional["VerticalRecoilRandom"];
+        _knockback = (float)Stats.Additional["Knockback"];
     }
 
     public override void _Process(double delta)
@@ -160,24 +163,34 @@ public partial class WeaponAk47 : BaseWeapon, IMagazine
 
     protected override void HandleHit(Node target)
     {
-        if (target is not EnemyECSProxy enemy)
-            return;
+        // if (target is not EnemyECSProxy enemy)
+        //     return;
 
-        var enemyId = enemy.Id;
-        var componentStore = GameWorld.Instance.EntityComponentStore;
+        Logger.LogDebug(target.GetType().Name);
+        switch (target)
+        {
+            case EnemyECSProxy enemy:
+                var enemyId = enemy.Id;
+                var componentStore = GameWorld.Instance.EntityComponentStore;
 
-        if (!componentStore.GetComponent<PositionComponent>(enemyId, out var pos))
-            return;
+                if (!componentStore.GetComponent<PositionComponent>(enemyId, out var pos))
+                    return;
 
-        var direction = Player.GlobalPosition.DirectionTo(pos.Position);
-        var pushVector = direction * 10;
+                var direction = Player.GlobalPosition.DirectionTo(pos.Position);
+                var pushVector = direction * _knockback;
 
-        componentStore.UpdateComponent(
-            enemyId,
-            new PositionComponent(pos.Position + pushVector, pos.Collidable)
-        );
+                componentStore.UpdateComponent(
+                    enemyId,
+                    new PositionComponent(pos.Position + pushVector, pos.Collidable)
+                );
 
-        enemy.Health -= Stats.Damage;
+                enemy.Health -= Stats.Damage;
+
+                break;
+            case EnemyEcsProxyBoss boss:
+                boss.Health -= Stats.Damage;
+                break;
+        }
     }
 }
 

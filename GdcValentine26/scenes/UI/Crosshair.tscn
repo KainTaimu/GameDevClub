@@ -82,6 +82,9 @@ animations = [{
 }]
 
 [node name="Crosshair" type="Node2D" unique_id=587001361 node_paths=PackedStringArray("CrosshairSprite")]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 script = ExtResource("1_v23f2")
 CrosshairSprite = NodePath("AnimatedSprite2D")
 

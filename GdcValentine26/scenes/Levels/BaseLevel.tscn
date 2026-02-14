@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c5r5weipk37fc" path="res://assets/Levels/grid_dark.png" id="2_k4v3f"]
 [ext_resource type="PackedScene" uid="uid://dsjdcr5umwl35" path="res://scenes/Players/Player.tscn" id="3_bjak0"]
 [ext_resource type="Script" uid="uid://cj4fvu7bi20jk" path="res://src/Core/GameWorld.cs" id="4_3s5m4"]
+[ext_resource type="PackedScene" uid="uid://boy4wjx3ct8lc" path="res://scenes/Weapons/WeaponAk47.tscn" id="4_6dc0t"]
 [ext_resource type="Script" uid="uid://cuk5cuawv18eq" path="res://src/Core/PauseController.cs" id="5_6dc0t"]
 [ext_resource type="PackedScene" uid="uid://cgtg1ql2vdm5a" path="res://scenes/Levels/EnemySpawner.tscn" id="6_11qfu"]
 [ext_resource type="PackedScene" uid="uid://bv1wsn1wy3c5v" path="res://scenes/Enemies/EnemyECSProxy.tscn" id="7_ocipa"]
@@ -15,6 +16,17 @@
 [ext_resource type="PackedScene" uid="uid://ewhmc6uc567h" path="res://scenes/UI/PlayerHealthIndicator.tscn" id="13_uj5ei"]
 [ext_resource type="Texture2D" uid="uid://b2nwln2aol7b0" path="res://assets/UI/heart.png" id="14_bms33"]
 [ext_resource type="PackedScene" uid="uid://ctc6edw48ra6d" path="res://scenes/UI/DeadScreen.tscn" id="15_ui2c6"]
+[ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="16_bjak0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3s5m4"]
+font = ExtResource("16_bjak0")
+font_size = 32
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bjak0"]
+font = ExtResource("16_bjak0")
+font_size = 32
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="Level" type="Node" unique_id=339669878]
 script = ExtResource("1_h6bwv")
@@ -35,6 +47,8 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=1716515543 instance=ExtResource("3_bjak0")]
 z_index = 1
+
+[node name="Ak47" parent="Player" unique_id=1361114539 instance=ExtResource("4_6dc0t")]
 
 [node name="Objectives" type="Node" parent="." unique_id=1476888644]
 
@@ -76,12 +90,62 @@ Player = NodePath("../../Player")
 PauseController = NodePath("../../Systems/PauseController")
 metadata/_edit_lock_ = true
 
-[node name="AmmoCount" parent="UI" unique_id=529590543 instance=ExtResource("12_tgj7e")]
-metadata/_edit_use_anchors_ = true
-
-[node name="PlayerHealthIndicator" parent="UI" unique_id=1847160975 node_paths=PackedStringArray("_player") instance=ExtResource("13_uj5ei")]
-_heartTexture = ExtResource("14_bms33")
-_player = NodePath("../../Player")
-metadata/_edit_use_anchors_ = true
-
 [node name="DeadScreen" parent="UI" unique_id=736062058 instance=ExtResource("15_ui2c6")]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1199348178]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 94.0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="UI/MarginContainer" unique_id=214866293]
+layout_mode = 2
+text = "Level 0"
+label_settings = SubResource("LabelSettings_3s5m4")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="UI" unique_id=1544874433]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="PlayerHealthIndicator" parent="UI/MarginContainer2" unique_id=1847160975 node_paths=PackedStringArray("_player") instance=ExtResource("13_uj5ei")]
+layout_mode = 2
+_heartTexture = ExtResource("14_bms33")
+_player = NodePath("../../../Player")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="UI" unique_id=2084032264]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -306.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="AmmoCount" parent="UI/MarginContainer3" unique_id=529590543 instance=ExtResource("12_tgj7e")]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_bjak0")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true

@@ -37,4 +37,9 @@ public partial class DeadScreen : CanvasLayer
     {
         GetTree().ReloadCurrentScene();
     }
+
+    public void StartOver()
+    {
+        GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "uid://5hhxiwse42yi");
+    }
 }

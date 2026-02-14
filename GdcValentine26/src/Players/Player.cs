@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Enemies;
 using Game.Interfaces;
 
 namespace Game.Players;
@@ -11,12 +12,19 @@ public partial class Player : Node2D, IHittable
     [Export]
     private Area2D _hitboxArea = null!;
 
+    [Export]
+    private TextureRect _sprite = null!;
+
     public EntityType EntityType { get; } = EntityType.Player;
 
     private float _iTime;
+    private Tween? _tween;
+    private ShaderMaterial _spriteShaderMaterial = null!;
 
     public override void _Ready()
     {
+        _spriteShaderMaterial = _sprite.Material as ShaderMaterial;
+
         GameWorld.Instance.MainPlayer = this;
 
         _hitboxArea.AreaEntered += HandleHit;
@@ -27,7 +35,6 @@ public partial class Player : Node2D, IHittable
             {
                 GameWorld.Instance.EmitSignal(GameWorld.SignalName.OnPlayerDeath);
                 GetNode("./PlayerMovementController").QueueFree();
-                GetNode("./PlayerWeaponController").QueueFree();
             }
         };
     }
@@ -42,9 +49,51 @@ public partial class Player : Node2D, IHittable
         if (_iTime > 0)
             return;
 
-        Character.PlayerStats.Health--;
-        Logger.LogDebug("hit", area.Name, Character.PlayerStats.Health);
+        if (area.GetParent() is not EnemyECSProxy && area.GetParent() is not EnemyEcsProxyBoss)
+            return;
+
+        var enemy = area.GetParent();
+
+        int damage;
+
+        switch (enemy)
+        {
+            case EnemyECSProxy a:
+                damage = a.Stats.Damage;
+                break;
+            case EnemyEcsProxyBoss a:
+                damage = a.Stats.Damage;
+                break;
+            default:
+                return;
+        }
+
+        Character.PlayerStats.Health -= damage;
 
         _iTime = Character.PlayerStats.InvincibilityTime;
+
+        HitFeedback();
+    }
+
+    private void HitFeedback()
+    {
+        _tween?.Kill();
+        _tween = CreateTween()
+            .BindNode(this)
+            .SetTrans(Tween.TransitionType.Expo)
+            .SetEase(Tween.EaseType.Out);
+        _spriteShaderMaterial.SetShaderParameter("flash_state", 1f);
+        _spriteShaderMaterial.SetShaderParameter("color", new Color("white"));
+        _tween.TweenMethod(
+            Callable.From(
+                (float i) =>
+                {
+                    _spriteShaderMaterial.SetShaderParameter("flash_state", i);
+                }
+            ),
+            1f,
+            0f,
+            1f
+        );
     }
 }

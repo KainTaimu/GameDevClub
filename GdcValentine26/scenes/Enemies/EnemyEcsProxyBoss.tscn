@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cav2kda5gocoj"]
+
+[ext_resource type="Script" uid="uid://dlyec2xo7ejj0" path="res://src/Enemies/EnemyEcsProxyBoss.cs" id="2_opx2p"]
+[ext_resource type="Shader" uid="uid://3aeb7jixqcsx" path="res://src/Shaders/flash.gdshader" id="2_qmg50"]
+[ext_resource type="Script" uid="uid://dv5ihvhgbwltd" path="res://src/Enemies/EnemyStats.cs" id="2_yfhmp"]
+[ext_resource type="Texture2D" uid="uid://dmdj51ysfwm4l" path="res://icon.svg" id="4_dydnw"]
+[ext_resource type="Script" uid="uid://c6h4tuclmcqja" path="res://src/Enemies/EnemyMovementController.cs" id="5_yfhmp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6kgn"]
+radius = 25.019993
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnunj"]
+resource_local_to_scene = true
+shader = ExtResource("2_qmg50")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flash_state = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_giy3e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dydnw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemyECSProxyBoss" type="Node2D" unique_id=1009769214 node_paths=PackedStringArray("Stats", "Sprite")]
+script = ExtResource("2_opx2p")
+Stats = NodePath("Stats")
+Sprite = NodePath("AnimatedSprite2D")
+metadata/_edit_lock_ = true
+
+[node name="Stats" type="Node" parent="." unique_id=157219457]
+script = ExtResource("2_yfhmp")
+MaxHealth = 1000
+Damage = 3
+MoveSpeed = 250.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1597532172]
+collision_layer = 16
+collision_mask = 257
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=603044243]
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_s6kgn")
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1130554689]
+material = SubResource("ShaderMaterial_bnunj")
+scale = Vector2(1.14, 1.14)
+sprite_frames = SubResource("SpriteFrames_giy3e")
+metadata/_edit_lock_ = true
+
+[node name="EnemyMovementController" type="Node" parent="." unique_id=463927796 node_paths=PackedStringArray("_boss", "_stats")]
+script = ExtResource("5_yfhmp")
+_boss = NodePath("..")
+_stats = NodePath("../Stats")

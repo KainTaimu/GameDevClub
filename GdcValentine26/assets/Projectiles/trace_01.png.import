@@ -2,22 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coljm8hobe4v6"
-path.bptc="res://.godot/imported/shondo.png-bad05e4077252497e7a9ef7d9687a879.bptc.ctex"
+uid="uid://rmicrmccdtv1"
+path="res://.godot/imported/trace_01.png-9b74e4fbd8bb8799b58b72579ff7e8fe.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Players/shondo.png"
-dest_files=["res://.godot/imported/shondo.png-bad05e4077252497e7a9ef7d9687a879.bptc.ctex"]
+source_file="res://assets/Projectiles/trace_01.png"
+dest_files=["res://.godot/imported/trace_01.png-9b74e4fbd8bb8799b58b72579ff7e8fe.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=true
+compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

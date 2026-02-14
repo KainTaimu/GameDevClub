@@ -1,6 +1,6 @@
 using Game.Core.ECS;
 
-namespace Game.Level;
+namespace Game.Levels;
 
 public partial class ObjectiveKillSpot : Area2D
 {
@@ -9,6 +9,9 @@ public partial class ObjectiveKillSpot : Area2D
 
     [Export]
     private int _killRadius = 64;
+
+    [Export]
+    private PackedScene _nextLevel = null!;
 
     [ExportCategory("Components")]
     [Export]
@@ -50,6 +53,12 @@ public partial class ObjectiveKillSpot : Area2D
                 return;
 
             KillCount++;
+
+            if (KillCount >= _killTarget)
+            {
+                Logger.LogInfo("Level 1 -> Level 2");
+                GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToPacked, _nextLevel);
+            }
         };
     }
 

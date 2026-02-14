@@ -16,4 +16,5 @@ Link to Project: <https://github.com/KainTaimu/GameDevClub/tree/master/GdcValent
 
 Credits:
 
-Placeholder assets <https://kenney.nl/>
+Assets <https://kenney.nl/>
+godot-debug-menu <https://github.com/godot-extended-libraries/godot-debug-menu>

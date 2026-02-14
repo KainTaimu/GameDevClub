@@ -50,6 +50,10 @@ folder_colors={
 "res://exports/": "gray"
 }
 
+[gui]
+
+theme/custom_font="uid://wr66amren2yv"
+
 [input]
 
 move_up={

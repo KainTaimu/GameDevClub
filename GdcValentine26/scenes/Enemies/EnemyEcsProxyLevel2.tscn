@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://wu6v0qchjh8s"]
+
+[ext_resource type="PackedScene" uid="uid://bv1wsn1wy3c5v" path="res://scenes/Enemies/EnemyECSProxy.tscn" id="1_7uw15"]
+[ext_resource type="Shader" uid="uid://3aeb7jixqcsx" path="res://src/Shaders/flash.gdshader" id="2_y5lvo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7uw15"]
+resource_local_to_scene = true
+shader = ExtResource("2_y5lvo")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flash_state = 0.0
+
+[node name="EnemyECSProxyLevel2" unique_id=423573223 instance=ExtResource("1_7uw15")]
+
+[node name="Stats" parent="." index="0" unique_id=157219457]
+MaxHealth = 6
+Damage = 2
+MoveSpeed = 170.0
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1130554689]
+material = SubResource("ShaderMaterial_7uw15")

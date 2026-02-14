@@ -22,6 +22,11 @@ public partial class PauseController : Node
                 Pause(this);
     }
 
+    public override void _ExitTree()
+    {
+        Tree.Paused = false;
+    }
+
     public void Lock(Node locker)
     {
         if (locker != LockedBy && LockedBy is not null)

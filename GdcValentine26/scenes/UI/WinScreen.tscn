@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://c6mxervt87xel"]
+
+[ext_resource type="Script" uid="uid://ihy76xhksi7g" path="res://src/UI/WinScreen.cs" id="1_1x85b"]
+[ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="1_m3d70"]
+[ext_resource type="VideoStream" uid="uid://b1gija23k4dyn" path="res://assets/Levels/yippie.ogv" id="2_1x85b"]
+[ext_resource type="Shader" uid="uid://b6af7yvkep5rh" path="res://src/Shaders/blur.gdshader" id="2_ag0jy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6aiu"]
+resource_local_to_scene = true
+shader = ExtResource("2_ag0jy")
+shader_parameter/amount = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7h6ec"]
+font = ExtResource("1_m3d70")
+font_size = 32
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="WinScreen" type="CenterContainer" unique_id=303201034 node_paths=PackedStringArray("_retryButton", "_startOverButton", "_blurRect", "_topLabel")]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1x85b")
+_retryButton = NodePath("VBoxContainer/HBoxContainer/Retry")
+_startOverButton = NodePath("VBoxContainer/HBoxContainer/StartOver")
+_blurRect = NodePath("Node/Control")
+_topLabel = NodePath("VBoxContainer/Label")
+
+[node name="Node" type="Node" parent="." unique_id=1501399964]
+
+[node name="Control" type="ColorRect" parent="Node" unique_id=898716265]
+z_index = -1
+material = SubResource("ShaderMaterial_y6aiu")
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=346880288]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1924039978]
+layout_mode = 2
+text = "You win!"
+label_settings = SubResource("LabelSettings_7h6ec")
+horizontal_alignment = 1
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="VBoxContainer" unique_id=1938057505]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+stream = ExtResource("2_1x85b")
+autoplay = true
+expand = true
+loop = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1621039849]
+layout_mode = 2
+alignment = 1
+
+[node name="Retry" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=371653742]
+layout_mode = 2
+text = "Retry"
+
+[node name="StartOver" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=2058345195]
+layout_mode = 2
+text = "Start over"
+
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/Retry" to="." method="Retry"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/StartOver" to="." method="StartOver"]

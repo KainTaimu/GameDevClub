@@ -47,6 +47,8 @@ public partial class EnemySpawner : Node
     public override void _Ready()
     {
         _entities.BeforeEntityUnregistered += (_) => Alive--;
+
+        GameWorld.Instance.OnPlayerDeath += () => ProcessMode = ProcessModeEnum.Disabled;
     }
 
     public override void _Process(double delta)

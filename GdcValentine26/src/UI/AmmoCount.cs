@@ -9,11 +9,7 @@ public partial class AmmoCount : Label
 
     public override void _Ready()
     {
-        _ak = (IMagazine)
-            GameWorld
-                .Instance!.MainPlayer!.GetNode("PlayerWeaponController")
-                .GetChildren()
-                .Single((x) => x is IMagazine);
+        _ak = (IMagazine)GameWorld.Instance!.MainPlayer!.GetNode("Ak47");
 
         Text = string.Concat(Enumerable.Repeat("I", _ak.MagazineCapacity));
         VisibleCharacters = _ak.MagazineCount;

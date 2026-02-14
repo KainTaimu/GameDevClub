@@ -4,18 +4,18 @@
 [ext_resource type="Script" uid="uid://cufvnsps55cue" path="res://src/Players/Character.cs" id="2_3li8b"]
 [ext_resource type="Script" uid="uid://dmfukp6jowdi" path="res://src/Players/PlayerStats.cs" id="3_cdd6o"]
 [ext_resource type="Script" uid="uid://cr4usnvohlaub" path="res://src/Players/Controllers/PlayerMovementController.cs" id="4_kfojw"]
-[ext_resource type="Script" uid="uid://b2hi2qof1jwra" path="res://src/Players/Controllers/PlayerWeaponController.cs" id="5_cw2d6"]
 [ext_resource type="Script" uid="uid://b07bj0yr8ru81" path="res://src/Players/Controllers/PlayerCameraController.cs" id="6_kfojw"]
-[ext_resource type="PackedScene" uid="uid://boy4wjx3ct8lc" path="res://scenes/Weapons/WeaponAk47.tscn" id="6_khinc"]
+[ext_resource type="Material" uid="uid://dkop3gaeg5ura" path="res://src/Shaders/flash.tres" id="7_v5xr6"]
 [ext_resource type="Texture2D" uid="uid://olpaicuflbr7" path="res://assets/Players/Q.png" id="9_v5xr6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yecw2"]
-radius = 13.0
+radius = 11.0
 
-[node name="Player" type="Node2D" unique_id=1716515543 node_paths=PackedStringArray("Character", "_hitboxArea")]
+[node name="Player" type="Node2D" unique_id=1716515543 node_paths=PackedStringArray("Character", "_hitboxArea", "_sprite")]
 script = ExtResource("1_f0mf6")
 Character = NodePath("Character")
 _hitboxArea = NodePath("Area2D")
+_sprite = NodePath("TextureRect")
 
 [node name="Character" type="Node" parent="." unique_id=937728986 node_paths=PackedStringArray("PlayerStats")]
 script = ExtResource("2_3li8b")
@@ -31,12 +31,8 @@ script = ExtResource("4_kfojw")
 _player = NodePath("..")
 _characterStats = NodePath("../Character/Stats")
 
-[node name="PlayerWeaponController" type="Node" parent="." unique_id=1986792816]
-script = ExtResource("5_cw2d6")
-
-[node name="Ak47" parent="PlayerWeaponController" unique_id=1361114539 instance=ExtResource("6_khinc")]
-
 [node name="TextureRect" type="TextureRect" parent="." unique_id=249845824]
+material = ExtResource("7_v5xr6")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
