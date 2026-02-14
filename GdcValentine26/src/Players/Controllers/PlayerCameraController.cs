@@ -10,6 +10,9 @@ public partial class PlayerCameraController : Camera2D
 
     public override void _Input(InputEvent @event)
     {
+        if (!OS.IsDebugBuild())
+            return;
+
         if (@event is not InputEventMouseButton mouse)
             return;
         var zoom = Zoom;

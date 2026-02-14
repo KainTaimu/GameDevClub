@@ -71,7 +71,7 @@ public partial class PlayerStats : Node
     public delegate void OnXpMultiplierChangedEventHandler(float oldValue, float newValue);
 
     private int _health;
-    private int _maxHealth = 100;
+    private int _maxHealth = 5;
     private float _moveSpeed = 800;
     private int _defense;
     private float _criticalChance;

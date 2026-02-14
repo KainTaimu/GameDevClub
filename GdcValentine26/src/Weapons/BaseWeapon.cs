@@ -9,5 +9,5 @@ public partial class BaseWeapon : BaseItem
 
     protected virtual void Attack() { }
 
-    protected virtual void HandleHit() { }
+    protected virtual void HandleHit(Node target) { }
 }

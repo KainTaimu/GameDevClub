@@ -1,0 +1,36 @@
+using System.Linq;
+using Game.Core;
+using Game.Core.ECS;
+
+namespace Game.Levels.Controllers;
+
+public partial class EnemyMover : Node
+{
+    [Export]
+    private EntityComponentStore _entities = null!;
+
+    public override void _Process(double delta)
+    {
+        var player = GameWorld.Instance.MainPlayer;
+        if (player is null)
+            return;
+        var playerPos = player.GlobalPosition;
+
+        var dead = player.Character.PlayerStats.Health == 0 ? -1 : 1;
+
+        // TODO: Very expensive. Add dictionary to map enemy type to index?
+        var enemies = _entities
+            .Query<PositionComponent, EntityTypeComponent>()
+            .Where(x => x.Item3.EntityType.HasFlag(EntityType.Enemy))
+            .Select(x => new { x.Item1, x.Item2 });
+
+        foreach (var x in enemies)
+        {
+            var (id, pos) = (x.Item1, x.Item2);
+
+            var p = pos.Position.MoveToward(playerPos, 150 * (float)delta * dead);
+
+            _entities.UpdateComponent(id, new PositionComponent(p, pos.Collidable));
+        }
+    }
+}

@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bv1wsn1wy3c5v"]
+
+[ext_resource type="Script" uid="uid://clw3q6ot3wmcl" path="res://src/Enemies/EnemyECSProxy.cs" id="1_0152b"]
+[ext_resource type="Script" uid="uid://dv5ihvhgbwltd" path="res://src/Enemies/EnemyStats.cs" id="2_cmhf2"]
+[ext_resource type="Texture2D" uid="uid://dmdj51ysfwm4l" path="res://icon.svg" id="3_cmhf2"]
+[ext_resource type="Shader" uid="uid://3aeb7jixqcsx" path="res://src/Shaders/flash.gdshader" id="3_giy3e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmhf2"]
+resource_local_to_scene = true
+shader = ExtResource("3_giy3e")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flash_state = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_giy3e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cmhf2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6kgn"]
+radius = 25.019993
+
+[node name="EnemyECSProxy" type="Node" unique_id=423573223 node_paths=PackedStringArray("Stats", "Sprite", "HitboxArea")]
+script = ExtResource("1_0152b")
+Stats = NodePath("Stats")
+Sprite = NodePath("AnimatedSprite2D")
+HitboxArea = NodePath("Area2D")
+metadata/_edit_lock_ = true
+
+[node name="Stats" type="Node" parent="." unique_id=157219457]
+script = ExtResource("2_cmhf2")
+Damage = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1130554689]
+material = SubResource("ShaderMaterial_cmhf2")
+scale = Vector2(0.285, 0.285)
+sprite_frames = SubResource("SpriteFrames_giy3e")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2134393666]
+collision_layer = 16
+collision_mask = 257
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=603044243]
+shape = SubResource("CircleShape2D_s6kgn")
+metadata/_edit_lock_ = true

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dsjdcr5umwl35"]
+
+[ext_resource type="Script" uid="uid://bdoxol4laadsw" path="res://src/Players/Player.cs" id="1_f0mf6"]
+[ext_resource type="Script" uid="uid://cufvnsps55cue" path="res://src/Players/Character.cs" id="2_3li8b"]
+[ext_resource type="Script" uid="uid://dmfukp6jowdi" path="res://src/Players/PlayerStats.cs" id="3_cdd6o"]
+[ext_resource type="Script" uid="uid://cr4usnvohlaub" path="res://src/Players/Controllers/PlayerMovementController.cs" id="4_kfojw"]
+[ext_resource type="Script" uid="uid://b2hi2qof1jwra" path="res://src/Players/Controllers/PlayerWeaponController.cs" id="5_cw2d6"]
+[ext_resource type="Script" uid="uid://b07bj0yr8ru81" path="res://src/Players/Controllers/PlayerCameraController.cs" id="6_kfojw"]
+[ext_resource type="PackedScene" uid="uid://boy4wjx3ct8lc" path="res://scenes/Weapons/WeaponAk47.tscn" id="6_khinc"]
+[ext_resource type="Texture2D" uid="uid://olpaicuflbr7" path="res://assets/Players/Q.png" id="9_v5xr6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yecw2"]
+radius = 13.0
+
+[node name="Player" type="Node2D" unique_id=1716515543 node_paths=PackedStringArray("Character", "_hitboxArea")]
+script = ExtResource("1_f0mf6")
+Character = NodePath("Character")
+_hitboxArea = NodePath("Area2D")
+
+[node name="Character" type="Node" parent="." unique_id=937728986 node_paths=PackedStringArray("PlayerStats")]
+script = ExtResource("2_3li8b")
+CharacterName = "Debug"
+PlayerStats = NodePath("Stats")
+
+[node name="Stats" type="Node" parent="Character" unique_id=689908296]
+script = ExtResource("3_cdd6o")
+InvincibilityTime = 1.1
+
+[node name="PlayerMovementController" type="Node" parent="." unique_id=626287651 node_paths=PackedStringArray("_player", "_characterStats")]
+script = ExtResource("4_kfojw")
+_player = NodePath("..")
+_characterStats = NodePath("../Character/Stats")
+
+[node name="PlayerWeaponController" type="Node" parent="." unique_id=1986792816]
+script = ExtResource("5_cw2d6")
+
+[node name="Ak47" parent="PlayerWeaponController" unique_id=1361114539 instance=ExtResource("6_khinc")]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=249845824]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_v5xr6")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=296596238]
+zoom = Vector2(0.9, 0.9)
+script = ExtResource("6_kfojw")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=102583120]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1000343759]
+shape = SubResource("CircleShape2D_yecw2")
+debug_color = Color(1, 0, 0, 0.41960785)
+metadata/_edit_lock_ = true

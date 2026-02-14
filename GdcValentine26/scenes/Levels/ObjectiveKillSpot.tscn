@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cv56qnau5rqwl"]
+
+[ext_resource type="Script" uid="uid://dabjhj6tusjun" path="res://src/Levels/ObjectiveKillSpot.cs" id="1_fy1rg"]
+[ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="2_wwa6t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wwa6t"]
+resource_local_to_scene = true
+radius = 64.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_tfulh"]
+font = ExtResource("2_wwa6t")
+font_size = 24
+
+[node name="ObjectiveKillSpot" type="Area2D" unique_id=392998732 node_paths=PackedStringArray("_collisionShape", "_helpLabel")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_fy1rg")
+_killRadius = 256
+_collisionShape = NodePath("CollisionShape2D")
+_helpLabel = NodePath("Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=393646565]
+visible = false
+shape = SubResource("CircleShape2D_wwa6t")
+
+[node name="Label" type="Label" parent="." unique_id=290463227]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -5.0
+offset_right = 5.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Kill enemies here! (0/N)"
+label_settings = SubResource("LabelSettings_tfulh")
+horizontal_alignment = 1

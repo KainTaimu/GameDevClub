@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://v2c8l1v25h7u"]
 
 [ext_resource type="Script" uid="uid://d1alweur34x7s" path="res://src/Levels/MasterScene.cs" id="1_pkrqt"]
-[ext_resource type="PackedScene" uid="uid://5hhxiwse42yi" path="res://scenes/Level1.tscn" id="2_ouyn2"]
+[ext_resource type="PackedScene" uid="uid://5hhxiwse42yi" path="res://scenes/Levels/Level1.tscn" id="2_ouyn2"]
 
 [node name="MasterScene" type="Node" unique_id=1515588899]
 script = ExtResource("1_pkrqt")

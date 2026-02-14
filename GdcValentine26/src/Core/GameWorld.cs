@@ -1,3 +1,4 @@
+using Game.Core.ECS;
 using Game.Levels;
 using Game.Players;
 
@@ -19,6 +20,7 @@ public partial class GameWorld : Node
         ProcessMode = ProcessModeEnum.Always;
     }
 
+    [Export]
     public BaseLevel? CurrentLevel
     {
         get => _currentLevel;
@@ -30,14 +32,13 @@ public partial class GameWorld : Node
         }
     }
 
-    public Player? MainPlayer
-    {
-        get => _mainPlayer;
-        set { _mainPlayer = value; }
-    }
+    [Export]
+    public Player? MainPlayer { get; set; }
+
+    [Export]
+    public EntityComponentStore EntityComponentStore { get; private set; } = null!;
 
     private BaseLevel? _currentLevel;
-    private Player? _mainPlayer;
 
     public void AnnouncePlayerDead(Node caller)
     {

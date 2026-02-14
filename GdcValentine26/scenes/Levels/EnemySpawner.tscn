@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cgtg1ql2vdm5a"]
+
+[ext_resource type="Script" uid="uid://c84qqolouop6c" path="res://src/Levels/EnemySpawner.cs" id="1_lvhre"]
+
+[node name="EnemySpawner" type="Node" unique_id=30611746]
+script = ExtResource("1_lvhre")
+
+[node name="Timer" type="Timer" parent="." unique_id=1756824863]
+wait_time = 0.00999999999999999
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="SpawnRandomEnemy"]

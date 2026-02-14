@@ -13,6 +13,15 @@ public partial class PauseController : Node
     public Node? LockedBy { get; private set; }
     private SceneTree Tree => GetTree();
 
+    public override void _Input(InputEvent @event)
+    {
+        if (Input.IsPhysicalKeyPressed(Key.Escape))
+            if (IsPaused)
+                Unpause(this);
+            else
+                Pause(this);
+    }
+
     public void Lock(Node locker)
     {
         if (locker != LockedBy && LockedBy is not null)

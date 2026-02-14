@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ewhmc6uc567h"]
+
+[ext_resource type="Script" uid="uid://b65k4blbmbwio" path="res://src/UI/PlayerHealthIndicator.cs" id="1_n2kdd"]
+
+[node name="PlayerHealthIndicator" type="HBoxContainer" unique_id=1847160975]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_n2kdd")

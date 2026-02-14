@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bvo4y4ghm7268"]
 
-[ext_resource type="Script" uid="uid://dtdlrm1plarf5" path="res://src/UI/Hud/crosshair/Crosshair.cs" id="1_v23f2"]
+[ext_resource type="Script" uid="uid://dtdlrm1plarf5" path="res://src/UI/Hud/Crosshair/Crosshair.cs" id="1_v23f2"]
 [ext_resource type="Texture2D" uid="uid://bsrks1plhji2" path="res://assets/UI/crosshair.png" id="2_dqn7s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svatc"]
@@ -81,11 +81,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Crosshair" type="Node2D" unique_id=587001361 node_paths=PackedStringArray("Player", "CrosshairSprite", "PauseController")]
+[node name="Crosshair" type="Node2D" unique_id=587001361 node_paths=PackedStringArray("CrosshairSprite")]
 script = ExtResource("1_v23f2")
-Player = NodePath("")
 CrosshairSprite = NodePath("AnimatedSprite2D")
-PauseController = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1326093589]
 sprite_frames = SubResource("SpriteFrames_r7dij")

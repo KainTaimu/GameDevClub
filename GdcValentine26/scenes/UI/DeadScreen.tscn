@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ctc6edw48ra6d"]
+
+[ext_resource type="Shader" uid="uid://b6af7yvkep5rh" path="res://src/Shaders/blur.gdshader" id="1_hdh62"]
+[ext_resource type="Script" uid="uid://d1gxxd4f7530o" path="res://src/UI/DeadScreen.cs" id="1_qlorr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdh62"]
+resource_local_to_scene = true
+shader = ExtResource("1_hdh62")
+shader_parameter/amount = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_qlorr"]
+font_size = 32
+
+[node name="DeadScreen" type="CanvasLayer" unique_id=736062058 node_paths=PackedStringArray("_blurRect", "_topLabel")]
+layer = 2
+script = ExtResource("1_qlorr")
+_blurRect = NodePath("Control")
+_topLabel = NodePath("CenterContainer/VBoxContainer/Label")
+
+[node name="Control" type="ColorRect" parent="." unique_id=225857869]
+material = SubResource("ShaderMaterial_hdh62")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1541690469]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1943095929]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1010300879]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "You died..."
+label_settings = SubResource("LabelSettings_qlorr")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1033833464]
+layout_mode = 2
+text = "Retry"
+
+[connection signal="button_down" from="CenterContainer/VBoxContainer/Button" to="." method="Reload"]

@@ -18,14 +18,15 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameWorld="*uid://cj4fvu7bi20jk"
 DebugTools="*uid://bk2p7yi3vn72w"
+DebugMenu="*uid://cggqb75a8w8r"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+window/vsync/vsync_mode=0
 window/size/mode.editor=0
 
 [dotnet]
@@ -37,9 +38,15 @@ project/assembly_name="GdcValentine26"
 naming/scene_name_casing=1
 naming/script_name_casing=1
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
+"res://addons/": "gray",
+"res://dev/": "gray",
 "res://exports/": "gray"
 }
 
@@ -89,11 +96,13 @@ gun_reload={
 
 2d_physics/layer_1="PlayerHitBox"
 2d_physics/layer_5="EnemyHitBox"
+2d_physics/layer_6="EnemyCollisionBox"
 2d_physics/layer_9="ProjectileHitBox"
 2d_physics/layer_14="PickupHitBox"
 
 [physics]
 
+2d/run_on_separate_thread=true
 3d/physics_engine="Jolt Physics"
 
 [rendering]

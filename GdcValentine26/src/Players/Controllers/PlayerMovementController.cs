@@ -8,9 +8,6 @@ public partial class PlayerMovementController : Node
     [Export]
     private PlayerStats _characterStats = null!;
 
-    [Export]
-    private AnimatedSprite2D _sprite = null!;
-
     private Viewport? _viewport;
 
     public override void _Ready()
@@ -30,13 +27,6 @@ public partial class PlayerMovementController : Node
         PlayerMovement(delta);
     }
 
-    public override void _Input(InputEvent @event)
-    {
-        if (@event is not InputEventMouseMotion motion)
-            return;
-        FlipSprite(motion.Position);
-    }
-
     private void PlayerMovement(double delta)
     {
         var up = Input.IsActionPressed(InputMapNames.MoveUp) ? 1 : 0;
@@ -53,11 +43,6 @@ public partial class PlayerMovementController : Node
         {
             inputX /= moveLength;
             inputY /= moveLength;
-            _sprite.Animation = "run";
-        }
-        else
-        {
-            _sprite.Animation = "idle";
         }
 
         var move = new Vector2(
@@ -69,14 +54,5 @@ public partial class PlayerMovementController : Node
 
         var newPos = originalPos + move;
         _player.SetPosition(newPos);
-    }
-
-    private void FlipSprite(Vector2 mousePos)
-    {
-        if (_viewport is null)
-            return;
-
-        var mouse = mousePos / _viewport.GetVisibleRect().Size.X;
-        _sprite.FlipH = mouse.X < 0.5;
     }
 }

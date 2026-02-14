@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cgy4cxwto5wia"]
+
+[ext_resource type="Script" uid="uid://c1tx776gvqjb8" path="res://src/UI/AmmoCount.cs" id="1_0jv18"]
+
+[node name="AmmoCount" type="Label" unique_id=529590543]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
+horizontal_alignment = 2
+visible_characters = 49
+visible_ratio = 0.4375
+script = ExtResource("1_0jv18")

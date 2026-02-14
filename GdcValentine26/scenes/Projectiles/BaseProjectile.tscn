@@ -4,3 +4,4 @@
 
 [node name="BaseProjectile" type="Node2D" unique_id=1842357710]
 script = ExtResource("1_yhy5l")
+TargetsWhat = 1

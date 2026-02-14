@@ -1,11 +1,14 @@
 using System.Threading.Tasks;
+using Game.Core;
+using Game.Core.ECS;
+using Game.Enemies;
 using Game.Players;
 using Game.Projectiles;
 using Game.UI;
 
 namespace Game.Weapons;
 
-public partial class WeaponAk47 : BaseWeapon
+public partial class WeaponAk47 : BaseWeapon, IMagazine
 {
     [Export]
     private PackedScene _projectileScene = null!;
@@ -59,6 +62,13 @@ public partial class WeaponAk47 : BaseWeapon
             Shoot();
     }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        if (_fireCooldown <= 0)
+            return;
+        _fireCooldown -= delta;
+    }
+
     private void Shoot()
     {
         if (_isReloading)
@@ -75,13 +85,6 @@ public partial class WeaponAk47 : BaseWeapon
 
         Attack();
         _fireCooldown = Stats.AttackSpeedSec;
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        if (_fireCooldown <= 0)
-            return;
-        _fireCooldown -= delta;
     }
 
     protected override void Attack()
@@ -109,12 +112,14 @@ public partial class WeaponAk47 : BaseWeapon
         var bloom = (float)GD.Randfn(rotation, _bloomCoefficient);
 
         var projectile = _projectileScene.Instantiate<ProjectileAk47Bullet>();
-        projectile.Origin = this;
+        projectile.Initialize(this, EntityType.Enemy | EntityType.Breakable);
+
         projectile.SetScale(Vector2.One * Stats.ProjectileScaleMultiplier);
         projectile.SetPosition(Player.Position);
         projectile.SetRotation(bloom);
         projectile.ProjectileSpeed = Stats.ProjectileSpeed;
         projectile.PierceLimit = Stats.PierceLimit;
+
         projectile.OnTargetHit += HandleHit;
         AddChild(projectile);
 
@@ -152,4 +157,32 @@ public partial class WeaponAk47 : BaseWeapon
         var recoil = new Vector2(recoilX, -recoilY);
         Crosshair.Recoil.ApplyImpulse(recoil, 1f);
     }
+
+    protected override void HandleHit(Node target)
+    {
+        if (target is not EnemyECSProxy enemy)
+            return;
+
+        var enemyId = enemy.Id;
+        var componentStore = GameWorld.Instance.EntityComponentStore;
+
+        if (!componentStore.GetComponent<PositionComponent>(enemyId, out var pos))
+            return;
+
+        var direction = Player.GlobalPosition.DirectionTo(pos.Position);
+        var pushVector = direction * 10;
+
+        componentStore.UpdateComponent(
+            enemyId,
+            new PositionComponent(pos.Position + pushVector, pos.Collidable)
+        );
+
+        enemy.Health -= Stats.Damage;
+    }
+}
+
+public interface IMagazine
+{
+    public int MagazineCount { get; }
+    public int MagazineCapacity { get; }
 }
