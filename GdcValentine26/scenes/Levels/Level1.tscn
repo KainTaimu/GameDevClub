@@ -6,9 +6,13 @@
 
 [node name="Level" unique_id=339669878 instance=ExtResource("1_e5spa")]
 
+[node name="Player" parent="." index="1" unique_id=1716515543]
+position = Vector2(960, 540)
+
 [node name="ObjectiveKillSpot" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=392998732 node_paths=PackedStringArray("_entities") instance=ExtResource("4_5mhgh")]
+position = Vector2(960, 540)
 _nextLevel = ExtResource("3_omh7s")
 _entities = NodePath("../../Systems/EntityComponentStore")
 
-[node name="Label" parent="UI" parent_id_path=PackedInt32Array(322773187) index="4" unique_id=214866293]
+[node name="Label" parent="UI/MarginContainer" parent_id_path=PackedInt32Array(1199348178) index="0" unique_id=214866293]
 text = "Level 1"

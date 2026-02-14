@@ -166,7 +166,6 @@ public partial class WeaponAk47 : BaseWeapon, IMagazine
         // if (target is not EnemyECSProxy enemy)
         //     return;
 
-        Logger.LogDebug(target.GetType().Name);
         switch (target)
         {
             case EnemyECSProxy enemy:

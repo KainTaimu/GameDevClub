@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.UI;
 
 namespace Game.Levels;
 
@@ -19,19 +20,14 @@ public partial class ObjectiveKillTarget : Node
     }
 
     [Export]
-    private string _winScreenScenePath = null!;
-
-    [Export]
-    private CanvasLayer _uiLayer = null!;
+    private WinScreen _winScreen = null!;
 
     [Export]
     private PauseController _pauseController = null!;
 
     private void OnTargetExiting()
     {
-        var winScreen = GD.Load<PackedScene>(_winScreenScenePath).Instantiate();
-        _uiLayer.CallDeferred(Node.MethodName.AddChild, winScreen);
-
+        _winScreen.ShowScreen();
         _pauseController.Pause(this);
     }
 }

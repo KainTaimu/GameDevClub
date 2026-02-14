@@ -24,13 +24,17 @@ visible = false
 shape = SubResource("CircleShape2D_wwa6t")
 
 [node name="Label" type="Label" parent="." unique_id=290463227]
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -5.0
-offset_right = 5.0
-offset_bottom = 23.0
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -14.0
+offset_right = 111.5
+offset_bottom = 14.0
 grow_horizontal = 2
+grow_vertical = 2
 text = "Kill enemies here! (0/N)"
 label_settings = SubResource("LabelSettings_tfulh")
 horizontal_alignment = 1

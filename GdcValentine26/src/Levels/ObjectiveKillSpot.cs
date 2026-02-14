@@ -65,6 +65,6 @@ public partial class ObjectiveKillSpot : Area2D
     public override void _Draw()
     {
         base._Draw();
-        DrawCircle(GlobalPosition, _killRadius, new Color(255, 0, 0, 0.2f));
+        DrawCircle(Vector2.Zero, _killRadius, new Color(255, 0, 0, 0.2f));
     }
 }

@@ -14,9 +14,11 @@ public partial class WinScreen : CenterContainer
     [Export]
     private Label _topLabel;
 
-    public override void _Ready()
+    public override void _Ready() { }
+
+    public void ShowScreen()
     {
-        Visible = true;
+        Show();
         var tween = CreateTween().SetParallel();
         tween.TweenMethod(
             Callable.From(

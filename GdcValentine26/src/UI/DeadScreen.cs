@@ -1,7 +1,13 @@
+using Game.Core;
+using Game.UI;
+
 namespace Game.Levels;
 
 public partial class DeadScreen : CanvasLayer
 {
+    [Export]
+    private PauseController _pauseController = null!;
+
     [Export]
     private ColorRect _blurRect;
 
@@ -29,7 +35,7 @@ public partial class DeadScreen : CanvasLayer
             );
             tween.TweenProperty(_topLabel, "modulate", new Color("ffffff"), 1f);
 
-            GetNode("../Crosshair").QueueFree();
+            GetNode<Crosshair>("../Crosshair").HideCrosshair();
         };
     }
 

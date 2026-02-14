@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://boy4wjx3ct8lc" path="res://scenes/Weapons/WeaponAk47.tscn" id="4_6dc0t"]
 [ext_resource type="Script" uid="uid://cuk5cuawv18eq" path="res://src/Core/PauseController.cs" id="5_6dc0t"]
 [ext_resource type="PackedScene" uid="uid://cgtg1ql2vdm5a" path="res://scenes/Levels/EnemySpawner.tscn" id="6_11qfu"]
+[ext_resource type="PackedScene" uid="uid://di0fhrcinliks" path="res://scenes/UI/PauseScreen.tscn" id="7_6dc0t"]
 [ext_resource type="PackedScene" uid="uid://bv1wsn1wy3c5v" path="res://scenes/Enemies/EnemyECSProxy.tscn" id="7_ocipa"]
 [ext_resource type="Script" uid="uid://dlhka8hou7wnu" path="res://src/Core/ECS/EntityComponentStore.cs" id="8_ccrqg"]
 [ext_resource type="Script" uid="uid://b6f6fmrv6ddbq" path="res://src/Levels/EnemyCollisionSolver.cs" id="9_4eyv5"]
@@ -64,6 +65,11 @@ EntityComponentStore = NodePath("../EntityComponentStore")
 process_mode = 3
 script = ExtResource("5_6dc0t")
 
+[node name="PauseScreen" parent="Systems/PauseController" unique_id=457005036 node_paths=PackedStringArray("_pauseController", "_deadScreen") instance=ExtResource("7_6dc0t")]
+visible = false
+_pauseController = NodePath("..")
+_deadScreen = NodePath("../../../UI/DeadScreen")
+
 [node name="EnemySpawner" parent="Systems" unique_id=30611746 node_paths=PackedStringArray("_entities") instance=ExtResource("6_11qfu")]
 process_priority = -1
 _entities = NodePath("../EntityComponentStore")
@@ -90,10 +96,12 @@ Player = NodePath("../../Player")
 PauseController = NodePath("../../Systems/PauseController")
 metadata/_edit_lock_ = true
 
-[node name="DeadScreen" parent="UI" unique_id=736062058 instance=ExtResource("15_ui2c6")]
+[node name="DeadScreen" parent="UI" unique_id=736062058 node_paths=PackedStringArray("_pauseController") instance=ExtResource("15_ui2c6")]
 visible = false
+_pauseController = NodePath("../../Systems/PauseController")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1199348178]
+z_index = -1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -113,6 +121,7 @@ label_settings = SubResource("LabelSettings_3s5m4")
 metadata/_edit_lock_ = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="UI" unique_id=1544874433]
+z_index = -1
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 5
@@ -129,6 +138,7 @@ metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="UI" unique_id=2084032264]
+z_index = -1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

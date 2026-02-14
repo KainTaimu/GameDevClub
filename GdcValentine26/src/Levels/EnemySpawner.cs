@@ -87,7 +87,6 @@ public partial class EnemySpawner : Node
 
             AddChild(enemyProxyNode);
         }
-        Logger.LogDebug(TotalSpawned);
     }
 
     private Vector2 GetPositionOutsideViewport()
