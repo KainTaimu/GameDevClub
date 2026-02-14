@@ -36,6 +36,7 @@ public partial class DeadScreen : CanvasLayer
             tween.TweenProperty(_topLabel, "modulate", new Color("ffffff"), 1f);
 
             GetNode<Crosshair>("../Crosshair").HideCrosshair();
+            _pauseController.Pause(this);
         };
     }
 

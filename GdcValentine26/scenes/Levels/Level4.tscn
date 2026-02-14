@@ -8,13 +8,13 @@
 
 [sub_resource type="Resource" id="Resource_2g1ft"]
 script = ExtResource("2_q7crt")
-Damage = 5
-CritDamageMultiplier = 1.2
-CritChanceProportion = 0.17
+Damage = 6
+CritDamageMultiplier = 1.1
+CritChanceProportion = 0.4
 ProjectileSpeed = 6000
 ProjectileScaleMultiplier = 1.1
 AttackSpeedSec = 0.15
-PierceLimit = 2
+PierceLimit = 3
 Additional = Dictionary[String, Variant]({
 "BloomCoefficient": 0.01,
 "HorizontalBaseRecoil": 3.0,
@@ -48,11 +48,14 @@ position = Vector2(2808, 915)
 _winScreen = NodePath("../../../UI/WinScreen")
 
 [node name="EnemySpawner" parent="Systems" parent_id_path=PackedInt32Array(1712163909) index="2" unique_id=30611746]
-MaxEnemyCount = 500
-MaxSpawnTime = 0.5
+MaxEnemyCount = 600
+MaxSpawnTime = 0.4
 
 [node name="WinScreen" parent="UI" parent_id_path=PackedInt32Array(322773187) index="0" unique_id=303201034 instance=ExtResource("5_2g1ft")]
 visible = false
+
+[node name="DeadScreen" parent="UI" parent_id_path=PackedInt32Array(322773187) index="2" unique_id=736062058]
+process_mode = 3
 
 [node name="Label" parent="UI/MarginContainer" parent_id_path=PackedInt32Array(1199348178) index="0" unique_id=214866293]
 text = "Level 4"

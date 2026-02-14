@@ -4,7 +4,9 @@
 [ext_resource type="Shader" uid="uid://3aeb7jixqcsx" path="res://src/Shaders/flash.gdshader" id="2_qmg50"]
 [ext_resource type="Script" uid="uid://dv5ihvhgbwltd" path="res://src/Enemies/EnemyStats.cs" id="2_yfhmp"]
 [ext_resource type="Texture2D" uid="uid://dmdj51ysfwm4l" path="res://icon.svg" id="4_dydnw"]
+[ext_resource type="Texture2D" uid="uid://olpaicuflbr7" path="res://assets/Players/Q.png" id="5_dydnw"]
 [ext_resource type="Script" uid="uid://c6h4tuclmcqja" path="res://src/Enemies/EnemyMovementController.cs" id="5_yfhmp"]
+[ext_resource type="Texture2D" uid="uid://dpctng3qotaf6" path="res://assets/Players/bow.png" id="6_klpch"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6kgn"]
 radius = 25.019993
@@ -24,9 +26,22 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dydnw")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_yfhmp"]
+font_size = 32
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="EnemyECSProxyBoss" type="Node2D" unique_id=1009769214 node_paths=PackedStringArray("Stats", "Sprite")]
+z_index = 1
 script = ExtResource("2_opx2p")
 Stats = NodePath("Stats")
 Sprite = NodePath("AnimatedSprite2D")
@@ -49,11 +64,35 @@ metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1130554689]
 material = SubResource("ShaderMaterial_bnunj")
-scale = Vector2(1.14, 1.14)
+scale = Vector2(5.075, 5.075)
 sprite_frames = SubResource("SpriteFrames_giy3e")
+animation = &"new_animation"
 metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=708623424]
+offset_left = 27.000006
+offset_top = -114.00001
+offset_right = 67.00001
+offset_bottom = -74.00001
+rotation = 0.5523374
+scale = Vector2(2.3134272, 2.3134272)
+texture = ExtResource("6_klpch")
 
 [node name="EnemyMovementController" type="Node" parent="." unique_id=463927796 node_paths=PackedStringArray("_boss", "_stats")]
 script = ExtResource("5_yfhmp")
 _boss = NodePath("..")
 _stats = NodePath("../Stats")
+
+[node name="Label" type="Label" parent="." unique_id=1732167491]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = -124.0
+offset_right = 52.0
+offset_bottom = -88.0
+grow_horizontal = 2
+text = "Your EX"
+label_settings = SubResource("LabelSettings_yfhmp")
+horizontal_alignment = 1
+vertical_alignment = 2

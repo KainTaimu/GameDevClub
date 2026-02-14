@@ -4,6 +4,10 @@
 [ext_resource type="Script" uid="uid://dv5ihvhgbwltd" path="res://src/Enemies/EnemyStats.cs" id="2_cmhf2"]
 [ext_resource type="Texture2D" uid="uid://dmdj51ysfwm4l" path="res://icon.svg" id="3_cmhf2"]
 [ext_resource type="Shader" uid="uid://3aeb7jixqcsx" path="res://src/Shaders/flash.gdshader" id="3_giy3e"]
+[ext_resource type="Texture2D" uid="uid://dpctng3qotaf6" path="res://assets/Players/bow.png" id="5_6vx83"]
+[ext_resource type="PackedScene" uid="uid://rv526axhe2xw" path="res://scenes/VFX/KillParticles.tscn" id="5_8efyp"]
+[ext_resource type="Shader" uid="uid://mntok6kq11sx" path="res://src/Shaders/hue.gdshader" id="5_cdy30"]
+[ext_resource type="Texture2D" uid="uid://olpaicuflbr7" path="res://assets/Players/Q.png" id="5_ciasx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cmhf2"]
 resource_local_to_scene = true
@@ -20,16 +24,31 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ciasx")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ciasx"]
+resource_local_to_scene = true
+shader = ExtResource("5_cdy30")
+shader_parameter/hue_shift = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6kgn"]
 radius = 25.019993
 
-[node name="EnemyECSProxy" type="Node" unique_id=423573223 node_paths=PackedStringArray("Stats", "Sprite", "HitboxArea")]
+[node name="EnemyECSProxy" type="Node" unique_id=423573223 node_paths=PackedStringArray("Stats", "Sprite", "HitboxArea", "KillParticles", "_bowRect")]
 script = ExtResource("1_0152b")
 Stats = NodePath("Stats")
 Sprite = NodePath("AnimatedSprite2D")
 HitboxArea = NodePath("Area2D")
+KillParticles = NodePath("KillParticles")
+_bowRect = NodePath("AnimatedSprite2D/TextureRect")
 metadata/_edit_lock_ = true
 
 [node name="Stats" type="Node" parent="." unique_id=157219457]
@@ -38,9 +57,20 @@ Damage = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1130554689]
 material = SubResource("ShaderMaterial_cmhf2")
-scale = Vector2(0.285, 0.285)
+scale = Vector2(1.37, 1.37)
 sprite_frames = SubResource("SpriteFrames_giy3e")
+animation = &"new_animation"
 metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="AnimatedSprite2D" unique_id=1340961619]
+material = SubResource("ShaderMaterial_ciasx")
+offset_left = 5.839416
+offset_top = -21.167881
+offset_right = 45.839417
+offset_bottom = 18.832119
+rotation = 0.5523374
+scale = Vector2(0.418245, 0.418245)
+texture = ExtResource("5_6vx83")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2134393666]
 collision_layer = 16
@@ -50,3 +80,5 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=603044243]
 shape = SubResource("CircleShape2D_s6kgn")
 metadata/_edit_lock_ = true
+
+[node name="KillParticles" parent="." unique_id=136474770 instance=ExtResource("5_8efyp")]

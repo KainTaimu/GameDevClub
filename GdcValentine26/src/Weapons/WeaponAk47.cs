@@ -183,13 +183,24 @@ public partial class WeaponAk47 : BaseWeapon, IMagazine
                     new PositionComponent(pos.Position + pushVector, pos.Collidable)
                 );
 
-                enemy.Health -= Stats.Damage;
+                enemy.Health -= Stats.Damage + (int)CalculateCrit();
 
                 break;
             case EnemyEcsProxyBoss boss:
-                boss.Health -= Stats.Damage;
+                boss.Health -= Stats.Damage + (int)CalculateCrit();
                 break;
         }
+    }
+
+    protected float CalculateCrit()
+    {
+        var roll = GD.Randf();
+        if (roll > Stats.CritChanceProportion)
+        {
+            return 0f;
+        }
+
+        return Stats.Damage * Stats.CritDamageMultiplier;
     }
 }
 
