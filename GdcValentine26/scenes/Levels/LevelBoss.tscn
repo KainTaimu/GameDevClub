@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://718c8xj27cvs"]
 
-[ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_cwodi"]
-[ext_resource type="Script" uid="uid://bmo6aqxo8hocq" path="res://src/Levels/ObjectiveKillTarget.cs" id="2_835iu"]
-[ext_resource type="Script" uid="uid://cwrwfjmfexleu" path="res://src/Weapons/WeaponStats.cs" id="2_q7crt"]
-[ext_resource type="PackedScene" uid="uid://cav2kda5gocoj" path="res://scenes/Enemies/EnemyEcsProxyBoss.tscn" id="3_nmb50"]
-[ext_resource type="PackedScene" uid="uid://c6mxervt87xel" path="res://scenes/UI/WinScreen.tscn" id="5_2g1ft"]
+[ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_ycq7q"]
+[ext_resource type="Script" uid="uid://cwrwfjmfexleu" path="res://src/Weapons/WeaponStats.cs" id="2_yo1mc"]
+[ext_resource type="Script" uid="uid://bmo6aqxo8hocq" path="res://src/Levels/ObjectiveKillTarget.cs" id="3_5wmpj"]
+[ext_resource type="PackedScene" uid="uid://cav2kda5gocoj" path="res://scenes/Enemies/EnemyEcsProxyBoss.tscn" id="4_gvaxg"]
+[ext_resource type="PackedScene" uid="uid://c6mxervt87xel" path="res://scenes/UI/WinScreen.tscn" id="5_sapfo"]
 
 [sub_resource type="Resource" id="Resource_2g1ft"]
-script = ExtResource("2_q7crt")
+script = ExtResource("2_yo1mc")
 Damage = 6
 CritDamageMultiplier = 1.1
 CritChanceProportion = 0.4
@@ -27,7 +27,7 @@ Additional = Dictionary[String, Variant]({
 })
 metadata/_custom_type_script = "uid://cwrwfjmfexleu"
 
-[node name="Level" unique_id=339669878 instance=ExtResource("1_cwodi")]
+[node name="Level" unique_id=339669878 instance=ExtResource("1_ycq7q")]
 
 [node name="Player" parent="." index="1" unique_id=1716515543]
 position = Vector2(960, 540)
@@ -36,12 +36,12 @@ position = Vector2(960, 540)
 Stats = SubResource("Resource_2g1ft")
 
 [node name="ObjectiveKillTarget" type="Node" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=559552507 node_paths=PackedStringArray("KillTarget", "_winScreen", "_pauseController")]
-script = ExtResource("2_835iu")
+script = ExtResource("3_5wmpj")
 KillTarget = NodePath("EnemyECSProxyBoss")
 _winScreen = NodePath("../../UI/WinScreen")
 _pauseController = NodePath("../../Systems/PauseController")
 
-[node name="EnemyECSProxyBoss" parent="Objectives/ObjectiveKillTarget" index="0" unique_id=423573223 instance=ExtResource("3_nmb50")]
+[node name="EnemyECSProxyBoss" parent="Objectives/ObjectiveKillTarget" index="0" unique_id=423573223 instance=ExtResource("4_gvaxg")]
 position = Vector2(2808, 915)
 
 [node name="PauseScreen" parent="Systems/PauseController" parent_id_path=PackedInt32Array(1935884730) index="0" unique_id=457005036 node_paths=PackedStringArray("_winScreen")]
@@ -51,7 +51,7 @@ _winScreen = NodePath("../../../UI/WinScreen")
 MaxEnemyCount = 600
 MaxSpawnTime = 0.4
 
-[node name="WinScreen" parent="UI" parent_id_path=PackedInt32Array(322773187) index="0" unique_id=303201034 instance=ExtResource("5_2g1ft")]
+[node name="WinScreen" parent="UI" parent_id_path=PackedInt32Array(322773187) index="0" unique_id=303201034 instance=ExtResource("5_sapfo")]
 visible = false
 
 [node name="DeadScreen" parent="UI" parent_id_path=PackedInt32Array(322773187) index="2" unique_id=736062058]

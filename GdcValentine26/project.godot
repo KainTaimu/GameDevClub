@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GdcValentine26"
-run/main_scene="uid://5hhxiwse42yi"
+run/main_scene="uid://dk477scr0by7o"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.svg"

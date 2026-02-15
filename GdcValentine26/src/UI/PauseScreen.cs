@@ -42,6 +42,7 @@ public partial class PauseScreen : CanvasLayer
 
     public void Continue()
     {
+        Hide();
         _pauseController.Unpause(this);
     }
 

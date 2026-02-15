@@ -6,12 +6,13 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdh62"]
 resource_local_to_scene = true
 shader = ExtResource("1_hdh62")
-shader_parameter/amount = 0.0
+shader_parameter/amount = 2.000000095
 
 [sub_resource type="LabelSettings" id="LabelSettings_qlorr"]
 font_size = 32
 
 [node name="DeadScreen" type="CanvasLayer" unique_id=736062058 node_paths=PackedStringArray("_blurRect", "_topLabel")]
+process_mode = 3
 layer = 2
 script = ExtResource("1_qlorr")
 _blurRect = NodePath("Control")
@@ -42,13 +43,13 @@ text = "You died..."
 label_settings = SubResource("LabelSettings_qlorr")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1033833464]
+[node name="Retry" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1033833464]
 layout_mode = 2
 text = "Retry"
 
-[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=183931978]
+[node name="StartOver" type="Button" parent="CenterContainer/VBoxContainer" unique_id=183931978]
 layout_mode = 2
 text = "Start over"
 
-[connection signal="button_down" from="CenterContainer/VBoxContainer/Button" to="." method="Reload"]
-[connection signal="button_down" from="CenterContainer/VBoxContainer/Button2" to="." method="StartOver"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Retry" to="." method="Reload"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartOver" to="." method="StartOver"]

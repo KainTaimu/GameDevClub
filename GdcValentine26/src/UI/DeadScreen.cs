@@ -42,11 +42,13 @@ public partial class DeadScreen : CanvasLayer
 
     public void Reload()
     {
+        Logger.LogDebug("Retrying");
         GetTree().ReloadCurrentScene();
     }
 
     public void StartOver()
     {
-        GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "uid://5hhxiwse42yi");
+        Logger.LogDebug("Starting over");
+        GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "uid://dk477scr0by7o");
     }
 }

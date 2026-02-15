@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cadumgljh7hd3"]
 
-[ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_85038"]
-[ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="2_2fpdq"]
-[ext_resource type="Script" uid="uid://cwrwfjmfexleu" path="res://src/Weapons/WeaponStats.cs" id="2_l4yri"]
-[ext_resource type="Script" uid="uid://dbvysyu3synah" path="res://src/Levels/ObjectiveSurviveTime.cs" id="3_w2wn3"]
-[ext_resource type="PackedScene" uid="uid://718c8xj27cvs" path="res://scenes/Levels/Level4.tscn" id="5_df4ni"]
+[ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_xunwy"]
+[ext_resource type="Script" uid="uid://cwrwfjmfexleu" path="res://src/Weapons/WeaponStats.cs" id="2_s3xtw"]
+[ext_resource type="Script" uid="uid://dbvysyu3synah" path="res://src/Levels/ObjectiveSurviveTime.cs" id="3_2g7jc"]
+[ext_resource type="PackedScene" uid="uid://718c8xj27cvs" path="res://scenes/Levels/LevelBoss.tscn" id="4_t8h32"]
+[ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="5_s5owo"]
 
 [sub_resource type="Resource" id="Resource_l4yri"]
-script = ExtResource("2_l4yri")
+script = ExtResource("2_s3xtw")
 Damage = 9
 CritDamageMultiplier = 1.2
 CritChanceProportion = 0.17
@@ -28,10 +28,10 @@ Additional = Dictionary[String, Variant]({
 metadata/_custom_type_script = "uid://cwrwfjmfexleu"
 
 [sub_resource type="LabelSettings" id="LabelSettings_sxh0n"]
-font = ExtResource("2_2fpdq")
+font = ExtResource("5_s5owo")
 font_size = 32
 
-[node name="Level" unique_id=339669878 instance=ExtResource("1_85038")]
+[node name="Level" unique_id=339669878 instance=ExtResource("1_xunwy")]
 
 [node name="Player" parent="." index="1" unique_id=1716515543]
 position = Vector2(960, 540)
@@ -40,8 +40,8 @@ position = Vector2(960, 540)
 Stats = SubResource("Resource_l4yri")
 
 [node name="ObjectiveSurviveTime" type="Node" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=174843067 node_paths=PackedStringArray("_objectiveLabel")]
-script = ExtResource("3_w2wn3")
-_nextLevel = ExtResource("5_df4ni")
+script = ExtResource("3_2g7jc")
+_nextLevel = ExtResource("4_t8h32")
 _objectiveLabel = NodePath("../../UI/ObjectiveLabel")
 
 [node name="EnemySpawner" parent="Systems" parent_id_path=PackedInt32Array(1712163909) index="2" unique_id=30611746]

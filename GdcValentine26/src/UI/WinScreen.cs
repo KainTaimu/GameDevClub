@@ -44,6 +44,6 @@ public partial class WinScreen : CenterContainer
 
     public void StartOver()
     {
-        GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "uid://5hhxiwse42yi");
+        GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, "uid://dk477scr0by7o");
     }
 }

@@ -1,32 +1,32 @@
 [gd_scene format=3 uid="uid://dk477scr0by7o"]
 
-[ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_6sp58"]
-[ext_resource type="Script" uid="uid://cctlbixb2muun" path="res://src/Levels/ObjectiveKillAmount.cs" id="2_2ncxa"]
-[ext_resource type="PackedScene" uid="uid://wu6v0qchjh8s" path="res://scenes/Enemies/EnemyEcsProxyLevel2.tscn" id="2_relvm"]
-[ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="3_aotjr"]
-[ext_resource type="PackedScene" uid="uid://cadumgljh7hd3" path="res://scenes/Levels/Level3.tscn" id="3_qrxlh"]
+[ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_328vu"]
+[ext_resource type="Script" uid="uid://cctlbixb2muun" path="res://src/Levels/ObjectiveKillAmount.cs" id="2_q3fb6"]
+[ext_resource type="PackedScene" uid="uid://5hhxiwse42yi" path="res://scenes/Levels/LevelKillArea.tscn" id="3_7rn31"]
+[ext_resource type="PackedScene" uid="uid://wu6v0qchjh8s" path="res://scenes/Enemies/EnemyEcsProxyLevel2.tscn" id="4_7qjd2"]
+[ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="5_5o1vd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qrxlh"]
-font = ExtResource("3_aotjr")
+font = ExtResource("5_5o1vd")
 font_size = 24
 
-[node name="Level" unique_id=339669878 instance=ExtResource("1_6sp58")]
+[node name="Level" unique_id=339669878 instance=ExtResource("1_328vu")]
 
 [node name="Player" parent="." index="1" unique_id=1716515543]
 position = Vector2(960, 540)
 
 [node name="ObjectiveKillAmount" type="Node" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=813705872 node_paths=PackedStringArray("_helpLabel", "_entities")]
-script = ExtResource("2_2ncxa")
-_nextLevel = ExtResource("3_qrxlh")
+script = ExtResource("2_q3fb6")
+_nextLevel = ExtResource("3_7rn31")
 _helpLabel = NodePath("../../UI/Label2")
 _entities = NodePath("../../Systems/EntityComponentStore")
 
 [node name="EnemySpawner" parent="Systems" parent_id_path=PackedInt32Array(1712163909) index="2" unique_id=30611746]
 MaxSpawnTime = 0.5
-_enemyProxyScene = ExtResource("2_relvm")
+_enemyProxyScene = ExtResource("4_7qjd2")
 
 [node name="Label" parent="UI/MarginContainer" parent_id_path=PackedInt32Array(1199348178) index="0" unique_id=214866293]
-text = "Level 2"
+text = "Level 1"
 
 [node name="Label2" type="Label" parent="UI" parent_id_path=PackedInt32Array(322773187) index="5" unique_id=790569887]
 anchors_preset = 5
