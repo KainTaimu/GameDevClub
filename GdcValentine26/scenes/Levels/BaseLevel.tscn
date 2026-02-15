@@ -94,6 +94,7 @@ _entities = NodePath("../EntityComponentStore")
 [node name="Crosshair" parent="UI" unique_id=587001361 node_paths=PackedStringArray("Player", "PauseController") instance=ExtResource("11_8oi54")]
 Player = NodePath("../../Player")
 PauseController = NodePath("../../Systems/PauseController")
+CrosshairSize = 1.5
 metadata/_edit_lock_ = true
 
 [node name="DeadScreen" parent="UI" unique_id=736062058 node_paths=PackedStringArray("_pauseController") instance=ExtResource("15_ui2c6")]

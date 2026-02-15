@@ -52,6 +52,8 @@ public partial class Crosshair : Node2D
 
         PauseController.OnPaused += HideCrosshair;
         PauseController.OnUnpaused += ShowCrosshair;
+
+        ChangeCrosshairSize(CrosshairSize);
     }
 
     public override void _ExitTree()

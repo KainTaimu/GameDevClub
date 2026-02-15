@@ -87,6 +87,7 @@ process_thread_group_order = 0
 process_thread_messages = 0
 script = ExtResource("1_v23f2")
 CrosshairSprite = NodePath("AnimatedSprite2D")
+CrosshairSize = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1326093589]
 sprite_frames = SubResource("SpriteFrames_r7dij")
