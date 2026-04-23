@@ -22,14 +22,14 @@ position = Vector2(960, 540)
 
 [node name="ObjectiveKillAmount" type="Node" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=813705872 node_paths=PackedStringArray("_helpLabel", "_entities", "_winScreen")]
 script = ExtResource("2_q3fb6")
-_targetKills = 3000
+_targetKills = 4000
 _nextLevel = ExtResource("3_7rn31")
 _helpLabel = NodePath("../../UI/VBoxContainer/Label2")
 _entities = NodePath("../../Systems/EntityComponentStore")
 _winScreen = NodePath("../../UI/WinScreen")
 
 [node name="EnemySpawner" parent="Systems" parent_id_path=PackedInt32Array(1712163909) index="2" unique_id=30611746]
-MaxEnemyCount = 3000
+MaxEnemyCount = 4000
 MaxSpawnTime = 0.01
 _enemyProxyScene = ExtResource("4_7qjd2")
 
