@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://dk477scr0by7o"]
 
 [ext_resource type="PackedScene" uid="uid://c7ngtkx05hmd6" path="res://scenes/Levels/BaseLevel.tscn" id="1_328vu"]
+[ext_resource type="PackedScene" uid="uid://b26kp4t3tyb28" path="res://scenes/Weapons/WeaponShotgun.tscn" id="2_7qjd2"]
 [ext_resource type="Script" uid="uid://cctlbixb2muun" path="res://src/Levels/ObjectiveKillAmount.cs" id="2_q3fb6"]
 [ext_resource type="PackedScene" uid="uid://5hhxiwse42yi" path="res://scenes/Levels/LevelKillArea.tscn" id="3_7rn31"]
 [ext_resource type="PackedScene" uid="uid://wu6v0qchjh8s" path="res://scenes/Enemies/EnemyEcsProxyLevel2.tscn" id="4_7qjd2"]
 [ext_resource type="FontFile" uid="uid://wr66amren2yv" path="res://assets/Munro-2LYe.ttf" id="5_5o1vd"]
+[ext_resource type="PackedScene" uid="uid://c6mxervt87xel" path="res://scenes/UI/WinScreen.tscn" id="5_q3fb6"]
+[ext_resource type="Script" uid="uid://dh6gyn83wylr5" path="res://src/UI/Hud/GameTimer.cs" id="7_7rn31"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qrxlh"]
 font = ExtResource("5_5o1vd")
@@ -15,28 +18,56 @@ font_size = 24
 [node name="Player" parent="." index="1" unique_id=1716515543]
 position = Vector2(960, 540)
 
-[node name="ObjectiveKillAmount" type="Node" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=813705872 node_paths=PackedStringArray("_helpLabel", "_entities")]
+[node name="Shotgun" parent="Player" index="6" unique_id=145689487 instance=ExtResource("2_7qjd2")]
+
+[node name="ObjectiveKillAmount" type="Node" parent="Objectives" parent_id_path=PackedInt32Array(1476888644) index="0" unique_id=813705872 node_paths=PackedStringArray("_helpLabel", "_entities", "_winScreen")]
 script = ExtResource("2_q3fb6")
+_targetKills = 3000
 _nextLevel = ExtResource("3_7rn31")
-_helpLabel = NodePath("../../UI/Label2")
+_helpLabel = NodePath("../../UI/VBoxContainer/Label2")
 _entities = NodePath("../../Systems/EntityComponentStore")
+_winScreen = NodePath("../../UI/WinScreen")
 
 [node name="EnemySpawner" parent="Systems" parent_id_path=PackedInt32Array(1712163909) index="2" unique_id=30611746]
-MaxSpawnTime = 0.5
+MaxEnemyCount = 3000
+MaxSpawnTime = 0.01
 _enemyProxyScene = ExtResource("4_7qjd2")
 
-[node name="Label" parent="UI/MarginContainer" parent_id_path=PackedInt32Array(1199348178) index="0" unique_id=214866293]
+[node name="WinScreen" parent="UI" parent_id_path=PackedInt32Array(322773187) index="0" unique_id=303201034 instance=ExtResource("5_q3fb6")]
+visible = false
+
+[node name="MarginContainer" parent="UI" parent_id_path=PackedInt32Array(322773187) index="3" unique_id=1199348178]
+visible = false
+
+[node name="Label" parent="UI/MarginContainer" index="0" unique_id=214866293]
 text = "Level 1"
 
-[node name="Label2" type="Label" parent="UI" parent_id_path=PackedInt32Array(322773187) index="5" unique_id=790569887]
+[node name="MarginContainer2" parent="UI" parent_id_path=PackedInt32Array(322773187) index="4" unique_id=1544874433]
+visible = false
+
+[node name="MarginContainer3" parent="UI" parent_id_path=PackedInt32Array(322773187) index="5" unique_id=2084032264]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" parent_id_path=PackedInt32Array(322773187) index="6" unique_id=1624167312]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = 28.0
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 60.0
 grow_horizontal = 2
+
+[node name="Label2" type="Label" parent="UI/VBoxContainer" index="0" unique_id=790569887]
+layout_mode = 2
 text = "Get kills!"
 label_settings = SubResource("LabelSettings_qrxlh")
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Timer" type="Label" parent="UI/VBoxContainer" index="1" unique_id=204653820]
+layout_mode = 2
+text = "Time: 00:00"
+label_settings = SubResource("LabelSettings_qrxlh")
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("7_7rn31")

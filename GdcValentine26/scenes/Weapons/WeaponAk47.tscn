@@ -8,19 +8,19 @@
 
 [sub_resource type="Resource" id="Resource_ur7re"]
 script = ExtResource("4_2ysuu")
-Damage = 2
+Damage = 5
 CritDamageMultiplier = 3.0
 CritChanceProportion = 0.3
 ProjectileSpeed = 6000
 ProjectileScaleMultiplier = 1.1
-AttackSpeedSec = 0.15
-PierceLimit = 2
+AttackSpeedSec = 0.18
+PierceLimit = 4
 Additional = Dictionary[String, Variant]({
 "BloomCoefficient": 0.01,
 "HorizontalBaseRecoil": 3.0,
 "HorizontalRecoilRandom": 1.0,
 "Knockback": 10.0,
-"MagazineCapacity": 30,
+"MagazineCapacity": 99999,
 "ReloadTimeMs": 1500,
 "VerticalBaseRecoil": 15.0,
 "VerticalRecoilRandom": 0.5

@@ -24,6 +24,7 @@ PlayerStats = NodePath("Stats")
 
 [node name="Stats" type="Node" parent="Character" unique_id=689908296]
 script = ExtResource("3_cdd6o")
+MaxHealth = 99999
 InvincibilityTime = 1.1
 
 [node name="PlayerMovementController" type="Node" parent="." unique_id=626287651 node_paths=PackedStringArray("_player", "_characterStats")]

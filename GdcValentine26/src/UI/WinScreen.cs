@@ -18,6 +18,7 @@ public partial class WinScreen : CenterContainer
 
     public void ShowScreen()
     {
+        GetTree().Paused = true;
         Show();
         var tween = CreateTween().SetParallel();
         tween.TweenMethod(

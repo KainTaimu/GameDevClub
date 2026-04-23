@@ -59,12 +59,12 @@ public partial class EnemySpawner : Node
 
     public void SpawnEnemy()
     {
-        if (_t > 0 || Alive >= MaxEnemyCount)
+        if (_t > 0 || TotalSpawned >= MaxEnemyCount)
             return;
 
         _t = GD.RandRange(MinSpawnTime, MaxSpawnTime);
 
-        for (var i = 0; i < 1; i++)
+        for (var i = 0; i < 10; i++)
         {
             var pos = GetPositionOutsideViewport();
 

@@ -1,4 +1,5 @@
 using Game.Core.ECS;
+using Game.UI;
 
 namespace Game.Levels;
 
@@ -16,6 +17,9 @@ public partial class ObjectiveKillAmount : Node
 
     [Export]
     private EntityComponentStore _entities = null!;
+
+    [Export]
+    private WinScreen _winScreen = null!;
 
     private int Kills
     {
@@ -36,8 +40,7 @@ public partial class ObjectiveKillAmount : Node
 
             if (Kills >= _targetKills)
             {
-                Logger.LogInfo("Level 2 -> Level 3");
-                GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToPacked, _nextLevel);
+                _winScreen.ShowScreen();
             }
         };
     }
